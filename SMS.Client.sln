@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29503.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMS.Client.Host", "SMS.Client\SMS.Client.Host.csproj", "{20ABBCC2-F4E0-485F-93D9-AF83FE18325F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMS.Client.Host", "SMS.Client.Host\SMS.Client.Host.csproj", "{20ABBCC2-F4E0-485F-93D9-AF83FE18325F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMS.Client.Log", "SMS.Client.Log\SMS.Client.Log.csproj", "{D69365F8-D03F-4736-ACE4-39F9CBBF1253}"
 EndProject
