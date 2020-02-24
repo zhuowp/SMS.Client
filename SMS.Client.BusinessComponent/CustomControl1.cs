@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SMS.Client.Controls
+namespace SMS.Client.BusinessComponent
 {
     /// <summary>
     /// Follow steps 1a or 1b and then 2 to use this custom control in a XAML file.
@@ -22,14 +22,14 @@ namespace SMS.Client.Controls
     /// Add this XmlNamespace attribute to the root element of the markup file where it is 
     /// to be used:
     ///
-    ///     xmlns:MyNamespace="clr-namespace:SMS.Client.Controls"
+    ///     xmlns:MyNamespace="clr-namespace:SMS.Client.BusinessComponent"
     ///
     ///
     /// Step 1b) Using this custom control in a XAML file that exists in a different project.
     /// Add this XmlNamespace attribute to the root element of the markup file where it is 
     /// to be used:
     ///
-    ///     xmlns:MyNamespace="clr-namespace:SMS.Client.Controls;assembly=SMS.Client.Controls"
+    ///     xmlns:MyNamespace="clr-namespace:SMS.Client.BusinessComponent;assembly=SMS.Client.BusinessComponent"
     ///
     /// You will also need to add a project reference from the project where the XAML file lives
     /// to this project and Rebuild to avoid compilation errors:
