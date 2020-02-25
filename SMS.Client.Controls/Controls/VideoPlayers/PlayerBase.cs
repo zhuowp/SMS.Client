@@ -13,8 +13,6 @@ namespace SMS.Client.Controls
 
         //视频图像绘制控件
         private System.Windows.Forms.Panel _playScreen = null;
-        //播放屏幕边框
-        private Border _mainBorder = null;
         //承载Winform控件的wpf容器
         private WindowsFormsHost _playScreenWindowsFormsHost = null;
 
@@ -30,11 +28,6 @@ namespace SMS.Client.Controls
         protected WindowsFormsHost PlayScreenWindowsFormsHost
         {
             set { _playScreenWindowsFormsHost = value; }
-        }
-
-        protected Border MainBorder
-        {
-            set { _mainBorder = value; }
         }
 
         public IntPtr ScreenHandle

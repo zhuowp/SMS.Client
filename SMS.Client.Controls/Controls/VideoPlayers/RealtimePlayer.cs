@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms.Integration;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -104,6 +105,17 @@ namespace SMS.Client.Controls
 
         #region Public Methods
 
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            WindowsFormsHost winFormsHost = GetTemplateChild("PART_WinFormsHost") as WindowsFormsHost;
+            if (winFormsHost != null)
+            {
+                PlayScreenWindowsFormsHost = winFormsHost;
+            }
+        }
+
         /// <summary>
         /// 开始播放实时预览
         /// </summary>
@@ -120,7 +132,7 @@ namespace SMS.Client.Controls
             if (PlayHandle >= 0)
             {
                 StopPlay();
-            }
+            } 
 
             //初始化播放屏
             InitializePlayScreen();

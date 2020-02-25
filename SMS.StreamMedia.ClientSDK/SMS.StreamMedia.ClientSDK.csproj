@@ -1,0 +1,105 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="DLL\HCSDK\AudioRender.dll" />
+    <None Remove="DLL\HCSDK\HCCore.dll" />
+    <None Remove="DLL\HCSDK\HCNetSDK.dll" />
+    <None Remove="DLL\HCSDK\HCNetSDKCom\AnalyzeData.dll" />
+    <None Remove="DLL\HCSDK\HCNetSDKCom\AudioIntercom.dll" />
+    <None Remove="DLL\HCSDK\HCNetSDKCom\HCAlarm.dll" />
+    <None Remove="DLL\HCSDK\HCNetSDKCom\HCAlarm.lib" />
+    <None Remove="DLL\HCSDK\HCNetSDKCom\HCCoreDevCfg.dll" />
+    <None Remove="DLL\HCSDK\HCNetSDKCom\HCDisplay.dll" />
+    <None Remove="DLL\HCSDK\HCNetSDKCom\HCGeneralCfgMgr.dll" />
+    <None Remove="DLL\HCSDK\HCNetSDKCom\HCGeneralCfgMgr.lib" />
+    <None Remove="DLL\HCSDK\HCNetSDKCom\HCIndustry.dll" />
+    <None Remove="DLL\HCSDK\HCNetSDKCom\HCPlayBack.dll" />
+    <None Remove="DLL\HCSDK\HCNetSDKCom\HCPreview.dll" />
+    <None Remove="DLL\HCSDK\HCNetSDKCom\HCPreview.lib" />
+    <None Remove="DLL\HCSDK\HCNetSDKCom\HCVoiceTalk.dll" />
+    <None Remove="DLL\HCSDK\HCNetSDKCom\libiconv2.dll" />
+    <None Remove="DLL\HCSDK\HCNetSDKCom\OpenAL32.dll" />
+    <None Remove="DLL\HCSDK\HCNetSDKCom\StreamTransClient.dll" />
+    <None Remove="DLL\HCSDK\HCNetSDKCom\SystemTransform.dll" />
+    <None Remove="DLL\HCSDK\PlayCtrl.dll" />
+    <None Remove="DLL\HCSDK\SuperRender.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="DLL\HCSDK\AudioRender.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DLL\HCSDK\HCCore.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DLL\HCSDK\HCNetSDK.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DLL\HCSDK\HCNetSDKCom\AnalyzeData.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DLL\HCSDK\HCNetSDKCom\AudioIntercom.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DLL\HCSDK\HCNetSDKCom\HCAlarm.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DLL\HCSDK\HCNetSDKCom\HCAlarm.lib">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DLL\HCSDK\HCNetSDKCom\HCCoreDevCfg.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DLL\HCSDK\HCNetSDKCom\HCDisplay.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DLL\HCSDK\HCNetSDKCom\HCGeneralCfgMgr.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DLL\HCSDK\HCNetSDKCom\HCGeneralCfgMgr.lib">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DLL\HCSDK\HCNetSDKCom\HCIndustry.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DLL\HCSDK\HCNetSDKCom\HCPlayBack.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DLL\HCSDK\HCNetSDKCom\HCPreview.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DLL\HCSDK\HCNetSDKCom\HCPreview.lib">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DLL\HCSDK\HCNetSDKCom\HCVoiceTalk.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DLL\HCSDK\HCNetSDKCom\libiconv2.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DLL\HCSDK\HCNetSDKCom\OpenAL32.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DLL\HCSDK\HCNetSDKCom\StreamTransClient.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DLL\HCSDK\HCNetSDKCom\SystemTransform.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DLL\HCSDK\PlayCtrl.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DLL\HCSDK\SuperRender.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SMS.Client.Log\SMS.Client.Log.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -42,11 +42,170 @@ namespace SMS.Client.Controls
     ///     <MyNamespace:TopmostPanel/>
     ///
     /// </summary>
-    public class TopmostPanel : Control
+    public class TopmostPanel : ContentControl
     {
+        #region Properties
+
+        public ContainerWindow ContentHodler { get; private set; }
+        public Window ParentWindow { get; private set; }
+
+        #endregion
+
+        #region Dependency Properties
+
+        public static readonly DependencyProperty IsTopmostProperty
+            = DependencyProperty.Register("IsTopmost", typeof(bool), typeof(TopmostPanel), new PropertyMetadata(false, new PropertyChangedCallback(OnIsTopmostPropertyChangedCallback)));
+
+        public static readonly DependencyProperty ChildProperty
+            = DependencyProperty.Register("Child", typeof(FrameworkElement), typeof(TopmostPanel), new PropertyMetadata(null, new PropertyChangedCallback(OnChildPropertyChangedCallback)));
+
+        #endregion
+
+        #region Dependency Property Wrappers
+
+        public bool IsTopmost
+        {
+            get { return (bool)GetValue(IsTopmostProperty); }
+            set { SetValue(IsTopmostProperty, value); }
+        }
+
+        public FrameworkElement Child
+        {
+            get { return (FrameworkElement)GetValue(ChildProperty); }
+            set { SetValue(ChildProperty, value); }
+        }
+
+        #endregion
+
+        #region Constructors
+
         static TopmostPanel()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(TopmostPanel), new FrameworkPropertyMetadata(typeof(TopmostPanel)));
         }
+
+        public TopmostPanel()
+        {
+            Loaded += TopmostPanel_Loaded;
+            Unloaded += TopmostPanel_Unloaded;
+        }
+
+        #endregion
+
+        #region Dependency Property Changed Callbacks
+
+        private static void OnIsTopmostPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs args)
+        {
+            TopmostPanel topMostPanel = d as TopmostPanel;
+            if (topMostPanel.ContentHodler != null)
+            {
+                topMostPanel.ContentHodler.Topmost = topMostPanel.IsTopmost;
+            }
+        }
+
+        private static void OnChildPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            TopmostPanel topMostPanel = d as TopmostPanel;
+            if (topMostPanel.ContentHodler == null)
+            {
+                topMostPanel.Content = topMostPanel.Child;
+            }
+            else
+            {
+                topMostPanel.ContentHodler.Content = topMostPanel.Child;
+            }
+        }
+
+        #endregion
+
+        #region Event Methods
+
+        private void TopmostPanel_Unloaded(object sender, RoutedEventArgs e)
+        {
+            UpdateContentHolderVisibility();
+        }
+
+        private void TopmostPanel_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (ContentHodler == null)
+            {
+                ContentHodler = new ContainerWindow(this)
+                {
+                    Topmost = IsTopmost
+                };
+
+                Panel.SetZIndex(ContentHodler, Panel.GetZIndex(this));
+                ContentHodler.Visibility = Visibility;
+                ContentHodler.Content = this.Child;
+                ContentHodler.DataContext = this.DataContext;
+            }
+
+            LayoutUpdated -= TopmostPanel_LayoutUpdated;
+            LayoutUpdated += TopmostPanel_LayoutUpdated;
+
+            IsVisibleChanged -= TopmostPanel_IsVisibleChanged;
+            IsVisibleChanged += TopmostPanel_IsVisibleChanged;
+
+            SizeChanged -= TopmostPanel_SizeChanged;
+            SizeChanged += TopmostPanel_SizeChanged;
+
+            UpdateContentHolderVisibility();
+        }
+
+        private void TopmostPanel_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (ActualHeight != double.NaN && ActualWidth != double.NaN)
+            {
+                ContentHodler.UpdateUILayout();
+                UpdateLayout();
+            }
+        }
+
+        private void TopmostPanel_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            UpdateContentHolderVisibility();
+        }
+
+        private void TopmostPanel_LayoutUpdated(object sender, EventArgs e)
+        {
+            if (ParentWindow != null && ContentHodler != null && this.IsLoaded && this.IsVisible)
+            {
+                ContentHodler.UpdateUILayout();
+            }
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private void UpdateContentHolderVisibility()
+        {
+            if (ContentHodler == null)
+            {
+                return;
+            }
+            if (IsLoaded && IsVisible)
+            {
+                ContentHodler.Opacity = 100;
+            }
+            else
+            {
+                ContentHodler.Opacity = 0;
+            }
+        }
+
+        #endregion
+
+        #region Public Methods
+
+        public void Dispose()
+        {
+            if (ContentHodler != null)
+            {
+                ContentHodler.Close();
+            }
+        }
+
+        #endregion
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SMS.Client.Host.Helpers;
+using SMS.Client.Host.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,23 @@ namespace SMS.Client
         public MainWindow()
         {
             InitializeComponent();
+
+            Loaded += MainWindow_Loaded;
+        }
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            VideoPlayModel playModel = new VideoPlayModel();
+
+            playModel.Ip = "192.168.28.136";
+            playModel.Port = 8000;
+            playModel.Channel = 1;
+            playModel.UserName = "admin";
+            playModel.Password = "admin12345";
+            playModel.StreamType = 0;
+
+            realtimeMonitorView.Player.PlayHelper = new VideoPlayHelper();
+            realtimeMonitorView.Player?.StartPlay(playModel);
         }
     }
 }
