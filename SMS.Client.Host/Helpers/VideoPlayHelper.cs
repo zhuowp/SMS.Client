@@ -12,14 +12,7 @@ namespace SMS.Client.Host.Helpers
         public bool CapturePicture(int playHandle, string fileName)
         {
             int result = SMClient.Instance.CapturePictureBMP(playHandle, fileName);
-            if (result == 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return result == 0;
         }
 
         public bool PTZControl(int playHandle, PTZControlType controlType, int stopFlag, int speed)
@@ -39,10 +32,6 @@ namespace SMS.Client.Host.Helpers
         public bool StopPlay(int playHandle)
         {
             return SMClient.Instance.StopPreview(playHandle) == 0;
-        }
-
-        public void Dispose()
-        {
         }
     }
 }

@@ -65,7 +65,7 @@ namespace SMS.Client.Controls
                 if (PlayHandle != -1 && _playHelper != null
                     && (PlayStatus != PlayStatus.Stop && PlayStatus != PlayStatus.Unknown))
                 {
-                    throw new Exception("Video cannot be playing while changing the PlayHelper.");
+                    throw new Exception("PlayHelper cannot be changed while playing video.");
                 }
 
                 _playHelper = value;
