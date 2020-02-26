@@ -6,13 +6,13 @@ namespace SMS.Client.Controls
 {
     public interface IReplayHelper
     {
-        event Action<IntPtr, DateTime> PlayPositionChangedEvent;
+        event Action<IntPtr, DateTime> ReplayPositionChangedEvent;
 
-        int StartReplay(IReplayModel replayModel);
-        bool StopReplay(int replayHandle);
-        bool PauseReplay(int replayHandle);
-        bool ContinueReplay(int replayHandle);
-        bool SetReplaySpeed(int replayHandle, double replaySpeed);
-        bool SetReplayPosition(int replayHandle, DateTime replayTime);
+        long StartReplay(IReplayModel replayModel);
+        bool StopReplay(IntPtr screenHandle);
+        bool PauseReplay(IntPtr screenHandle);
+        bool ResumeReplay(IntPtr screenHandle);
+        bool SetReplaySpeed(IntPtr screenHandle, double replaySpeed);
+        bool SetReplayPosition(IntPtr screenHandle, DateTime replayTime);
     }
 }

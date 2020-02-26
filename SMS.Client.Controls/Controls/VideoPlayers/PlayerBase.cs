@@ -19,7 +19,7 @@ namespace SMS.Client.Controls
         //播放控件句柄
         private IntPtr _screenHandle = IntPtr.Zero;
         //播放句柄
-        private int _playHandle = -1;
+        private long _playHandle = -1;
 
         #endregion
 
@@ -35,7 +35,7 @@ namespace SMS.Client.Controls
             get { return _screenHandle; }
         }
 
-        public int PlayHandle
+        public long PlayHandle
         {
             get { return _playHandle; }
             protected set { _playHandle = value; }
@@ -82,7 +82,7 @@ namespace SMS.Client.Controls
 
         private void OnScreenClicked(object sender, EventArgs e)
         {
-
+            
         }
 
         #endregion

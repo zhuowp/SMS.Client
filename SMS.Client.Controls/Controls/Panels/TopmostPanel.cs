@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -42,6 +43,7 @@ namespace SMS.Client.Controls
     ///     <MyNamespace:TopmostPanel/>
     ///
     /// </summary>
+    [ContentProperty("Child")]
     public class TopmostPanel : ContentControl
     {
         #region Properties

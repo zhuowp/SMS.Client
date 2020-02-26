@@ -121,18 +121,18 @@ namespace SMS.Client.Controls
         /// </summary>
         /// <param name="playModel"></param>
         /// <returns></returns>
-        public int StartPlay(IPlayModel playModel)
+        public bool StartPlay(IPlayModel playModel)
         {
             if (PlayHelper == null)
             {
-                return -1;
+                return false;
             }
 
             //在开始一个新预览之前关闭前一次预览
             if (PlayHandle >= 0)
             {
                 StopPlay();
-            } 
+            }
 
             //初始化播放屏
             InitializePlayScreen();
@@ -140,7 +140,7 @@ namespace SMS.Client.Controls
             playModel.ScreenHandle = ScreenHandle;
             PlayHandle = PlayHelper.StartPlay(playModel);
 
-            return PlayHandle;
+            return PlayHandle >= 0;
         }
 
         /// <summary>
@@ -149,7 +149,7 @@ namespace SMS.Client.Controls
         /// <returns></returns>
         public bool StopPlay()
         {
-            if (PlayHelper == null || PlayHandle < 0)
+            if (PlayHandle < 0)
             {
                 return false;
             }

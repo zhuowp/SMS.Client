@@ -7,12 +7,12 @@ namespace SMS.Client.Controls
     public interface IRealtimePlayHelper
     {
         //开始预览
-        int StartPlay(IPlayModel playModel);
+        long StartPlay(IPlayModel playModel);
         //停止预览
-        bool StopPlay(int playHandle);
+        bool StopPlay(long playHandle);
         //云台控制
-        bool PTZControl(int playHandle, PTZControlType controlType, int stopFlag, int speed);        
+        bool PTZControl(long playHandle, PTZControlType controlType, int stopFlag, int speed);        
         //抓图
-        bool CapturePicture(int playHandle, string fileName);
+        bool CapturePicture(long playHandle, string fileName);
     }
 }

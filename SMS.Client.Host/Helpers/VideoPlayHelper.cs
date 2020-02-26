@@ -9,29 +9,29 @@ namespace SMS.Client.Host.Helpers
 {
     public class VideoPlayHelper : IRealtimePlayHelper
     {
-        public bool CapturePicture(int playHandle, string fileName)
+        public bool CapturePicture(long playHandle, string fileName)
         {
-            int result = SMClient.Instance.CapturePictureBMP(playHandle, fileName);
+            int result = SMClient.Instance.CapturePictureBMP((int)playHandle, fileName);
             return result == 0;
         }
 
-        public bool PTZControl(int playHandle, PTZControlType controlType, int stopFlag, int speed)
+        public bool PTZControl(long playHandle, PTZControlType controlType, int stopFlag, int speed)
         {
             SMPTZControlType smControlType = (SMPTZControlType)((int)controlType);
 
-            return SMClient.Instance.PTZControl(playHandle, smControlType, stopFlag, speed);
+            return SMClient.Instance.PTZControl((int)playHandle, smControlType, stopFlag, speed);
         }
 
-        public int StartPlay(IPlayModel playParam)
+        public long StartPlay(IPlayModel playParam)
         {
             VideoPlayModel playModel = playParam as VideoPlayModel;
 
             return SMClient.Instance.StartPreview(playModel.ScreenHandle, playModel.Ip, playModel.Port, playModel.UserName, playModel.Password, playModel.Channel, playModel.StreamType);
         }
 
-        public bool StopPlay(int playHandle)
+        public bool StopPlay(long playHandle)
         {
-            return SMClient.Instance.StopPreview(playHandle) == 0;
+            return SMClient.Instance.StopPreview((int)playHandle) == 0;
         }
     }
 }

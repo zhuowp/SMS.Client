@@ -27,6 +27,12 @@ namespace SMS.Client
             InitializeComponent();
 
             Loaded += MainWindow_Loaded;
+            Closed += MainWindow_Closed;
+        }
+
+        private void MainWindow_Closed(object sender, EventArgs e)
+        {
+            realtimeMonitorView.Player.StopPlay();
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)

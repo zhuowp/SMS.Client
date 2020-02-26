@@ -65,12 +65,12 @@ namespace SMS.Client.Controls
             {
                 if (PlayHandle != -1 && _recordPlayHelper != null)
                 {
-                    _recordPlayHelper.StopReplay(PlayHandle);
-                    _recordPlayHelper.PlayPositionChangedEvent -= _recordPlayHelper_PlayPositionChangedEvent;
+                    _recordPlayHelper.StopReplay(ScreenHandle);
+                    _recordPlayHelper.ReplayPositionChangedEvent -= _recordPlayHelper_PlayPositionChangedEvent;
                 }
 
                 _recordPlayHelper = value;
-                _recordPlayHelper.PlayPositionChangedEvent += _recordPlayHelper_PlayPositionChangedEvent;
+                _recordPlayHelper.ReplayPositionChangedEvent += _recordPlayHelper_PlayPositionChangedEvent;
             }
         }
 
@@ -125,10 +125,18 @@ namespace SMS.Client.Controls
             }
         }
 
-        private bool StartReplay(IReplayModel replayModel)
+        #endregion
+
+        #region Protected Methods
+
+        #endregion
+
+        #region Public Methods
+
+        public bool StartReplay(IReplayModel replayModel)
         {
             //回放参数必须不能为空
-            if (replayModel == null || replayModel.BeginTime == default(DateTime))
+            if (replayModel == null)
             {
                 return false;
             }
@@ -136,7 +144,7 @@ namespace SMS.Client.Controls
             InitializePlayScreen();
 
             replayModel.ScreenHandle = ScreenHandle;
-            int replayHandle = _recordPlayHelper.StartReplay(replayModel);
+            long replayHandle = _recordPlayHelper.StartReplay(replayModel);
             if (replayHandle >= 0)
             {
                 SetValue(ReplayStatusKey, PlayStatus.Play);
@@ -147,14 +155,6 @@ namespace SMS.Client.Controls
             return false;
         }
 
-        #endregion
-
-        #region Protected Methods
-
-        #endregion
-
-        #region Public Methods
-
         public bool StopReplay()
         {
             if (_recordPlayHelper == null || PlayHandle == -1)
@@ -162,7 +162,7 @@ namespace SMS.Client.Controls
                 return false;
             }
 
-            bool isStopSuccess = _recordPlayHelper.StopReplay(PlayHandle);
+            bool isStopSuccess = _recordPlayHelper.StopReplay(ScreenHandle);
             DisposePlayScreen();
             SetValue(ReplaySpeedKey, 1.0);
             SetValue(ReplayStatusKey, PlayStatus.Stop);
@@ -177,7 +177,7 @@ namespace SMS.Client.Controls
                 return false;
             }
 
-            bool isPauseReplaySuccess = _recordPlayHelper.PauseReplay(PlayHandle);
+            bool isPauseReplaySuccess = _recordPlayHelper.PauseReplay(ScreenHandle);
 
             SetValue(ReplayStatusKey, PlayStatus.Pause);
             return isPauseReplaySuccess;
@@ -190,7 +190,7 @@ namespace SMS.Client.Controls
                 return false;
             }
 
-            bool isContinueReplaySuccess = _recordPlayHelper.ContinueReplay(PlayHandle);
+            bool isContinueReplaySuccess = _recordPlayHelper.ResumeReplay(ScreenHandle);
 
             SetValue(ReplayStatusKey, PlayStatus.Play);
             return isContinueReplaySuccess;
@@ -209,7 +209,7 @@ namespace SMS.Client.Controls
                 return false;
             }
 
-            if (_recordPlayHelper.SetReplaySpeed(PlayHandle, newReplaySpeed))
+            if (_recordPlayHelper.SetReplaySpeed(ScreenHandle, newReplaySpeed))
             {
                 SetValue(ReplaySpeedKey, newReplaySpeed);
                 return true;
@@ -231,7 +231,7 @@ namespace SMS.Client.Controls
                 return false;
             }
 
-            if (_recordPlayHelper.SetReplaySpeed(PlayHandle, newReplaySpeed))
+            if (_recordPlayHelper.SetReplaySpeed(ScreenHandle, newReplaySpeed))
             {
                 SetValue(ReplaySpeedKey, newReplaySpeed);
                 return true;
@@ -247,7 +247,7 @@ namespace SMS.Client.Controls
                 return false;
             }
 
-            bool isSetReplayPositionSuccess = _recordPlayHelper.SetReplayPosition(PlayHandle, replayTime);
+            bool isSetReplayPositionSuccess = _recordPlayHelper.SetReplayPosition(ScreenHandle, replayTime);
             return isSetReplayPositionSuccess;
         }
 
