@@ -11,7 +11,7 @@ namespace SMS.Client.Controls
         #region Fields
 
         private readonly Control _hostView = null;
-        private readonly object _lock = new object();
+        private readonly object _layoutUpdateLock = new object();
 
         #endregion
 
@@ -25,20 +25,19 @@ namespace SMS.Client.Controls
 
         public ContainerWindow(Control hostView)
         {
-            _hostView = hostView ?? throw new Exception("The host view is null!");
+            InitWindowProperty();
 
-            ShowInTaskbar = false;
+            _hostView = hostView ?? throw new Exception("The host view cannot be null!");
 
-            Width = 0;
-            Height = 0;
+            _hostView.DataContextChanged += HostView_DataContextChanged;
+            _hostView.FocusableChanged += HostView_FocusableChanged;
+            _hostView.IsEnabledChanged += HostView_IsEnabledChanged;
+            _hostView.IsHitTestVisibleChanged += HostView_IsHitTestVisibleChanged;
+            _hostView.IsMouseCapturedChanged += HostView_IsMouseCapturedChanged;
+            _hostView.IsVisibleChanged += HostView_IsVisibleChanged;
+            _hostView.SizeChanged += HostView_SizeChanged;
 
-            WindowStyle = WindowStyle.None;
-            ResizeMode = ResizeMode.NoResize;
-            AllowsTransparency = true;
-            Background = null;
-
-            UpdateUILayout();
-
+            Loaded += ContainerWindow_Loaded;
             Closed += ContainerWindow_Closed;
         }
 
@@ -46,27 +45,68 @@ namespace SMS.Client.Controls
 
         #region Event Methods
 
+        private void ContainerWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            UpdateUILayout();
+        }
+
         private void ContainerWindow_Closed(object sender, EventArgs e)
         {
             if (ParentWindow != null && ParentWindow.IsActive)
             {
-                ParentWindow.LocationChanged -= ParentWindow_LocationChanged; ;
-                ParentWindow.SizeChanged -= ParentWindow_SizeChanged; ;
-                ParentWindow.StateChanged -= ParentWindow_StateChanged;
+                ParentWindow.LocationChanged -= ParentWindow_LocationChanged;
             }
         }
 
+        private void HostView_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            UpdateUILayout();
+        }
+
+        private void HostView_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            Visibility visibility = (Visibility)e.NewValue;
+            UpdateVisibility(visibility);
+            if (visibility == Visibility.Visible)
+            {
+                UpdateUILayout();
+            }
+        }
+
+        private void HostView_IsMouseCapturedChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            bool isMouseCaputred = (bool)e.NewValue;
+            if (isMouseCaputred)
+            {
+                CaptureMouse();
+            }
+            else
+            {
+                ReleaseMouseCapture();
+            }
+        }
+
+        private void HostView_IsHitTestVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            IsHitTestVisible = (bool)e.NewValue;
+        }
+
+        private void HostView_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            IsEnabled = (bool)e.NewValue;
+        }
+
+        private void HostView_FocusableChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            Focusable = (bool)e.NewValue;
+        }
+
+        private void HostView_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            DataContext = e.NewValue;
+        }
+
         private void ParentWindow_LocationChanged(object sender, EventArgs e)
-        {
-            UpdateUILayout();
-        }
-
-        private void ParentWindow_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            UpdateUILayout();
-        }
-
-        private void ParentWindow_StateChanged(object sender, EventArgs e)
         {
             UpdateUILayout();
         }
@@ -75,9 +115,35 @@ namespace SMS.Client.Controls
 
         #region Private Methods
 
+        private void InitWindowProperty()
+        {
+            ShowInTaskbar = false;
+            WindowStyle = WindowStyle.None;
+            ResizeMode = ResizeMode.NoResize;
+            AllowsTransparency = true;
+            Background = null;
+        }
+
+        private void UpdateVisibility(Visibility visibility)
+        {
+            if (visibility == Visibility.Hidden || visibility == Visibility.Collapsed)
+            {
+                Visibility = Visibility.Hidden;
+            }
+            else if (visibility == Visibility.Visible)
+            {
+                Visibility = Visibility.Visible;
+            }
+        }
+
         private void UpdateParentWindow()
         {
             Window newParentWindow = GetWindow(_hostView);
+            if (newParentWindow == null)
+            {
+                throw new Exception("The parent window of container window cannot be null");
+            }
+
             if (newParentWindow == ParentWindow)
             {
                 return;
@@ -85,40 +151,12 @@ namespace SMS.Client.Controls
 
             if (ParentWindow != null)
             {
-                ParentWindow.LocationChanged -= ParentWindow_LocationChanged; ;
-                ParentWindow.SizeChanged -= ParentWindow_SizeChanged; ;
-                ParentWindow.StateChanged -= ParentWindow_StateChanged;
+                ParentWindow.LocationChanged -= ParentWindow_LocationChanged;
             }
 
-            if (newParentWindow != null)
-            {
-                newParentWindow.LocationChanged += ParentWindow_LocationChanged; ;
-                newParentWindow.SizeChanged += ParentWindow_SizeChanged; ;
-                newParentWindow.StateChanged += ParentWindow_StateChanged;
-            }
-
+            newParentWindow.LocationChanged += ParentWindow_LocationChanged;
             ParentWindow = newParentWindow;
             Owner = ParentWindow;
-        }
-
-        private void UpdateVisibility()
-        {
-            if (ParentWindow == null)
-            {
-                return;
-            }
-
-            if (ParentWindow.WindowState == WindowState.Minimized)
-            {
-                Visibility = Visibility.Hidden;
-            }
-            else
-            {
-                if (Visibility == Visibility.Hidden)
-                {
-                    Visibility = Visibility.Visible;
-                }
-            }
         }
 
         private void UpdateSize()
@@ -131,23 +169,20 @@ namespace SMS.Client.Controls
         {
             if (ParentWindow == null || _hostView == null)
             {
-                return;
+                throw new Exception("The parent window and host cannot be null.");
             }
 
             Point relativePoint = _hostView.TranslatePoint(new Point(), ParentWindow); ;
 
-            double parentLeft = ParentWindow.Left;
-            double parentTop = ParentWindow.Top;
-            double parentWidth = ParentWindow.ActualWidth;
-            double parentHeight = ParentWindow.ActualHeight;
-            if (ParentWindow.WindowState == WindowState.Maximized)
-            {
-                parentLeft = 0;
-                parentTop = 0;
-                parentWidth = SystemParameters.FullPrimaryScreenWidth;
-                parentHeight = SystemParameters.FullPrimaryScreenHeight;
-            }
-
+            //double parentLeft = ParentWindow.Left;
+            //double parentTop = ParentWindow.Top;
+            //if (ParentWindow.WindowState == WindowState.Maximized)
+            //{
+            //    parentLeft = 0;
+            //    parentTop = 0;
+            //}
+            double parentLeft = 0;
+            double parentTop = 0;
             //定位窗口的左边
             if (_hostView.HorizontalContentAlignment == HorizontalAlignment.Left || _hostView.HorizontalContentAlignment == HorizontalAlignment.Stretch)
             {
@@ -183,10 +218,9 @@ namespace SMS.Client.Controls
 
         public void UpdateUILayout()
         {
-            lock (_lock)
+            lock (_layoutUpdateLock)
             {
                 UpdateParentWindow();
-                UpdateVisibility();
                 UpdateLocation();
                 UpdateSize();
             }

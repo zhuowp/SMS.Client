@@ -42,13 +42,23 @@ namespace SMS.Client.Controls
     ///     <MyNamespace:WindowPanel/>
     ///
     /// </summary>
-    public class WindowPanel : Control
+    public class WindowPanel : ContentControl
     {
         #region Fields
+
+        private ContainerWindow _containerWindow = null;
 
         #endregion
 
         #region Properties
+
+        public Window ContainerWindow
+        {
+            get
+            {
+                return _containerWindow;
+            }
+        }
 
         #endregion
 
@@ -74,6 +84,7 @@ namespace SMS.Client.Controls
         static WindowPanel()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(WindowPanel), new FrameworkPropertyMetadata(typeof(WindowPanel)));
+            ContentProperty.OverrideMetadata(typeof(WindowPanel), new PropertyMetadata(null, OnContentChanged));
         }
 
         #endregion
@@ -82,6 +93,20 @@ namespace SMS.Client.Controls
 
         private static void OnIsTopmostChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
+            WindowPanel windowPanel = d as WindowPanel;
+            if (windowPanel._containerWindow != null)
+            {
+                windowPanel._containerWindow.Topmost = (bool)e.NewValue;
+            }
+        }
+
+        private static void OnContentChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            WindowPanel windowPanel = d as WindowPanel;
+            if (windowPanel._containerWindow != null)
+            {
+                windowPanel._containerWindow.Content = e.NewValue;
+            }
         }
 
         #endregion

@@ -56,10 +56,10 @@ namespace SMS.Client.Controls
         #region Dependency Properties
 
         public static readonly DependencyProperty IsTopmostProperty
-            = DependencyProperty.Register("IsTopmost", typeof(bool), typeof(TopmostPanel), new PropertyMetadata(false, new PropertyChangedCallback(OnIsTopmostPropertyChangedCallback)));
+            = DependencyProperty.Register("IsTopmost", typeof(bool), typeof(TopmostPanel), new PropertyMetadata(false, new PropertyChangedCallback(OnIsTopmostChanged)));
 
         public static readonly DependencyProperty ChildProperty
-            = DependencyProperty.Register("Child", typeof(FrameworkElement), typeof(TopmostPanel), new PropertyMetadata(null, new PropertyChangedCallback(OnChildPropertyChangedCallback)));
+            = DependencyProperty.Register("Child", typeof(FrameworkElement), typeof(TopmostPanel), new PropertyMetadata(null, new PropertyChangedCallback(OnChildChanged)));
 
         #endregion
 
@@ -84,6 +84,7 @@ namespace SMS.Client.Controls
         static TopmostPanel()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(TopmostPanel), new FrameworkPropertyMetadata(typeof(TopmostPanel)));
+      
         }
 
         public TopmostPanel()
@@ -96,7 +97,7 @@ namespace SMS.Client.Controls
 
         #region Dependency Property Changed Callbacks
 
-        private static void OnIsTopmostPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs args)
+        private static void OnIsTopmostChanged(DependencyObject d, DependencyPropertyChangedEventArgs args)
         {
             TopmostPanel topMostPanel = d as TopmostPanel;
             if (topMostPanel.ContentHodler != null)
@@ -105,7 +106,7 @@ namespace SMS.Client.Controls
             }
         }
 
-        private static void OnChildPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnChildChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             TopmostPanel topMostPanel = d as TopmostPanel;
             if (topMostPanel.ContentHodler == null)
