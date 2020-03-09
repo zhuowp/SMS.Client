@@ -1,8 +1,10 @@
-﻿using System;
+﻿using SMS.Client.Controls.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Interop;
 
 namespace SMS.Client.Controls
 {
@@ -65,7 +67,8 @@ namespace SMS.Client.Controls
 
         private void HostView_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            Visibility visibility = (Visibility)e.NewValue;
+            FrameworkElement element = sender as FrameworkElement;
+            Visibility visibility = element.Visibility; 
             UpdateVisibility(visibility);
             if (visibility == Visibility.Visible)
             {
@@ -157,6 +160,7 @@ namespace SMS.Client.Controls
             newParentWindow.LocationChanged += ParentWindow_LocationChanged;
             ParentWindow = newParentWindow;
             Owner = ParentWindow;
+            Win32.SetParent(new WindowInteropHelper(this).Handle, new WindowInteropHelper(ParentWindow).Handle);
         }
 
         private void UpdateSize()
