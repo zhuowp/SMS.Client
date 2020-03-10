@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace SMS.Client.Controls.Helpers
+namespace SMS.Client.Controls
 {
     class Win32
     {

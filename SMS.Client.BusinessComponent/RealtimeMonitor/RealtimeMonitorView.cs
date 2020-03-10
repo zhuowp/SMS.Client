@@ -48,6 +48,9 @@ namespace SMS.Client.BusinessComponent
         #region Fields
 
         private RealtimePlayer _player = null;
+        private WindowPanel _winPanel = null;
+        private TagContainer _tagContainer = null;
+        private Grid _gridTitle = null;
 
         #endregion
 
@@ -56,6 +59,23 @@ namespace SMS.Client.BusinessComponent
         public RealtimePlayer Player
         {
             get { return _player; }
+        }
+
+        #endregion
+
+        #region Dependency Properties
+
+        public static readonly DependencyProperty TitleProperty =
+            DependencyProperty.Register("Title", typeof(string), typeof(RealtimeMonitorView), new PropertyMetadata(string.Empty));
+
+        #endregion
+
+        #region Dependency Property Wrappers
+
+        public string Title
+        {
+            get { return (string)GetValue(TitleProperty); }
+            set { SetValue(TitleProperty, value); }
         }
 
         #endregion
@@ -71,6 +91,15 @@ namespace SMS.Client.BusinessComponent
 
         #region Private Methods
 
+        private void _gridTitle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Window window = LVTreeHelper.GetVisualParent<Window>(this);
+            if (window != null)
+            {
+                window.DragMove();
+            }
+        }
+
         #endregion
 
         #region Protected Methods
@@ -83,6 +112,13 @@ namespace SMS.Client.BusinessComponent
         {
             base.OnApplyTemplate();
             _player = GetTemplateChild("PART_Player") as RealtimePlayer;
+            _winPanel = GetTemplateChild("PART_TopmostPanel") as WindowPanel;
+            _tagContainer = GetTemplateChild("PART_TagContainer") as TagContainer;
+            _gridTitle = GetTemplateChild("PART_Title") as Grid;
+            if(_gridTitle != null)
+            {
+                _gridTitle.MouseLeftButtonDown += _gridTitle_MouseLeftButtonDown; ;
+            }
         }
 
         #endregion

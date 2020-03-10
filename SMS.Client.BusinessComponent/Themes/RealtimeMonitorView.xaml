@@ -14,14 +14,8 @@
                             <ctrl:RealtimePlayer x:Name="PART_Player" Grid.Column="0"/>
 
                             <!--信息显示区-->
-                            <ctrl:TopmostPanel x:Name="PART_TopmostPanel" IsTopmost="False">
+                            <ctrl:WindowPanel x:Name="PART_TopmostPanel" IsTopmost="False">
                                 <Grid>
-                                    <Grid.ContextMenu>
-                                        <ContextMenu>
-                                            <MenuItem x:Name="miPicCapture" Header="抓图"/>
-                                            <MenuItem x:Name="miAddTag" Header="添加标签"/>
-                                        </ContextMenu>
-                                    </Grid.ContextMenu>
                                     <Grid.RowDefinitions>
                                         <RowDefinition/>
                                         <RowDefinition Height="auto"/>
@@ -29,29 +23,29 @@
 
                                     <ctrl:TagContainer x:Name="PART_TagContainer" Grid.RowSpan="2"/>
 
-                                    <!--标题区-->
+                                    <!--标题栏-->
                                     <Grid x:Name="PART_Title" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                                        <Border x:Name="borderHeader" Background="Blue" Opacity="0.01" Height="50"/>
+                                        <Border x:Name="borderHeader" Background="White" Opacity="0.01" Height="50"/>
                                         <Grid VerticalAlignment="Stretch" HorizontalAlignment="Center">
                                             <Border Background="Blue" Opacity="0.3"/>
-                                            <TextBlock Text="视频安防监控系统" Foreground="White" FontSize="24" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,0,20,0"/>
+                                            <TextBlock Text="{TemplateBinding Title}" Foreground="White" FontSize="24" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,0,20,0"/>
                                         </Grid>
                                         <Button x:Name="btnCloseWindow" Content="关闭" VerticalAlignment="Center" HorizontalAlignment="Right"/>
                                     </Grid>
 
                                     <!--云台控制-->
-                                    <!--<ctrl:PtzController VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="200" Width="300"
-                                    OuterRadiusX="200" OuterRadiusY="200" InnerRadiusX="80" InnerRadiusY="80" DirectionControllerOffsetX="70" DirectionControllerOffsetY="70"
-                                    BorderBrush="Chartreuse" BorderThickness="1" MaxSpeed="7" MinSpeed="1" 
-                                    ControllerNormalBrush="Red" ControllerMouseOverBrush="LightBlue"
-                                    PtzControl="PtzController_PtzControl"/>-->
+                                    <ctrl:PtzController x:Name="PART_PtzController" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="200" Width="300"
+                                                        OuterRadiusX="200" OuterRadiusY="200" InnerRadiusX="80" InnerRadiusY="80" 
+                                                        DirectionControllerOffsetX="70" DirectionControllerOffsetY="70"
+                                                        BorderBrush="Chartreuse" BorderThickness="1" MaxSpeed="7" MinSpeed="1" 
+                                                        ControllerNormalBrush="Red" ControllerMouseOverBrush="LightBlue"/>
 
                                     <StackPanel Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
                                         <Button x:Name="btnStartPlay" Content="播放" Height="40" Width="60" Tag="0"/>
                                         <Button x:Name="btnStopPlay" Content="停止" Height="40" Width="60" Tag="0"/>
                                     </StackPanel>
                                 </Grid>
-                            </ctrl:TopmostPanel>
+                            </ctrl:WindowPanel>
                         </Grid>
                     </Border>
                 </ControlTemplate>

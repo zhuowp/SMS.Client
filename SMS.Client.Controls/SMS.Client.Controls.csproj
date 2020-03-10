@@ -6,4 +6,34 @@
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Page Update="Themes\EagleEye.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\HeatMap.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\PlaneMap.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\ImageButton.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\AreaTag.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\LineTextTag.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Panorama.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\IconTag.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\ImageRadioButton.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
 </Project>

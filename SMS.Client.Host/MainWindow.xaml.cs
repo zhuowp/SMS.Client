@@ -1,5 +1,6 @@
 ﻿using SMS.Client.Host.Helpers;
 using SMS.Client.Host.Models;
+using SMS.Client.Host.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,7 @@ namespace SMS.Client
         public MainWindow()
         {
             InitializeComponent();
+            realtimeMonitorView.DataContext = new RealtimeMonitorViewModel();
 
             Loaded += MainWindow_Loaded;
             Closed += MainWindow_Closed;

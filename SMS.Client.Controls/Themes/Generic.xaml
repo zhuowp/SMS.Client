@@ -4,115 +4,28 @@
     xmlns:local="clr-namespace:SMS.Client.Controls">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/CircularPanel.xaml"/>
+        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/WindowPanel.xaml"/>
+        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/PtzController.xaml"/>
         <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/RealtimePlayer.xaml"/>
+        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/Replayer.xaml"/>
+        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/TagContainer.xaml"/>
+        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/IconTag.xaml"/>
+        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/LineTextTag.xaml"/>
+        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/AreaTag.xaml"/>
+        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/ImageButton.xaml"/>
+        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/ImageRadioButton.xaml"/>
+        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/Tellurion.xaml"/>
+        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/Panorama.xaml"/>
+        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/PlaneMap.xaml"/>
+        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/EagleEye.xaml"/>
+        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/HeatMap.xaml"/>
+        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/HeatMapLegend.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
-    <Style TargetType="{x:Type local:TopmostPanel}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:TopmostPanel}">
-                    <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style TargetType="{x:Type local:ImageButton}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:ImageButton}">
-                    <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style TargetType="{x:Type local:ImageRadioButton}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:ImageRadioButton}">
-                    <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style TargetType="{x:Type local:IconTag}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:IconTag}">
-                    <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style TargetType="{x:Type local:Panorama}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:Panorama}">
-                    <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style TargetType="{x:Type local:TagContainer}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:TagContainer}">
-                    <Border x:Name="PART_MainBorder" Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
-                        <Grid Background="Black">
-                            <WindowsFormsHost x:Name="PART_WinFormsHost">
-                            </WindowsFormsHost>
-                        </Grid>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
 
 
-    <Style TargetType="{x:Type local:Replayer}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:Replayer}">
-                    <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
 
-    <Style TargetType="{x:Type local:WindowPanel}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:WindowPanel}">
-                    <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+
+
+
 </ResourceDictionary>
