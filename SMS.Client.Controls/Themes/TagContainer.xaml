@@ -8,7 +8,8 @@
                     <Border x:Name="PART_MainBorder" Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
-                        <Grid>
+                        <Grid x:Name="PART_Root">
+                            <Canvas x:Name="PART_TagCanvas"/>
                         </Grid>
                     </Border>
                 </ControlTemplate>

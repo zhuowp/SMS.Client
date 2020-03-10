@@ -42,11 +42,106 @@ namespace SMS.Client.Controls
     ///     <MyNamespace:IconTag/>
     ///
     /// </summary>
-    public class IconTag : Control
+    public class IconTag : TagBase
     {
+        #region Fields
+
+        private ImageButton _iconButton = null;
+
+        #endregion
+
+        #region Properties
+
+        #endregion
+
+        #region Dependency Properties
+
+        public static readonly DependencyProperty IconWidthProperty =
+            DependencyProperty.Register("IconWidth", typeof(double), typeof(IconTag), new PropertyMetadata(44.0));
+
+        public static readonly DependencyProperty IconHeightProperty =
+            DependencyProperty.Register("IconHeight", typeof(double), typeof(IconTag), new PropertyMetadata(44.0));
+
+        public static readonly DependencyProperty IconProperty =
+            DependencyProperty.Register("Icon", typeof(string), typeof(IconTag), new PropertyMetadata(""));
+
+        public static readonly DependencyProperty MouseOverIconProperty =
+            DependencyProperty.Register("MouseOverIcon", typeof(string), typeof(IconTag), new PropertyMetadata(""));
+
+        public static readonly DependencyProperty MouseDownIconProperty =
+            DependencyProperty.Register("MouseDownIcon", typeof(string), typeof(IconTag), new PropertyMetadata(""));
+
+        #endregion
+
+        #region Dependency Property Wrappers
+
+        public double IconWidth
+        {
+            get { return (double)GetValue(IconWidthProperty); }
+            set { SetValue(IconWidthProperty, value); }
+        }
+
+        public double IconHeight
+        {
+            get { return (double)GetValue(IconHeightProperty); }
+            set { SetValue(IconHeightProperty, value); }
+        }
+
+        public string Icon
+        {
+            get { return (string)GetValue(IconProperty); }
+            set { SetValue(IconProperty, value); }
+        }
+
+        public string MouseOverIcon
+        {
+            get { return (string)GetValue(MouseOverIconProperty); }
+            set { SetValue(MouseOverIconProperty, value); }
+        }
+
+        public string MouseDownIcon
+        {
+            get { return (string)GetValue(MouseDownIconProperty); }
+            set { SetValue(MouseDownIconProperty, value); }
+        }
+
+        #endregion
+
+        #region Constructors
+
         static IconTag()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(IconTag), new FrameworkPropertyMetadata(typeof(IconTag)));
         }
+
+        #endregion
+
+        #region Private Methods
+
+        #endregion
+
+        #region Protected Methods
+
+        private void IconButton_Click(object sender, RoutedEventArgs e)
+        {
+            RaiseTagClickEvent(this, e);
+        }
+
+        #endregion
+
+        #region Public Methods
+
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            _iconButton = GetTemplateChild("PART_Icon") as ImageButton;
+            if (_iconButton != null)
+            {
+                _iconButton.Click += IconButton_Click;
+            }
+        }
+
+        #endregion
     }
 }

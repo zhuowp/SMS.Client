@@ -42,7 +42,7 @@ namespace SMS.Client.Controls
     ///     <MyNamespace:ImageButton/>
     ///
     /// </summary>
-    public class ImageButton : Control
+    public class ImageButton : Button
     {
         static ImageButton()
         {

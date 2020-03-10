@@ -28,7 +28,7 @@
                                         <Border x:Name="borderHeader" Background="White" Opacity="0.01" Height="50"/>
                                         <Grid VerticalAlignment="Stretch" HorizontalAlignment="Center">
                                             <Border Background="Blue" Opacity="0.3"/>
-                                            <TextBlock Text="{TemplateBinding Title}" Foreground="White" FontSize="24" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,0,20,0"/>
+                                            <TextBlock Text="{Binding Title}" Foreground="White" FontSize="24" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,0,20,0"/>
                                         </Grid>
                                         <Button x:Name="btnCloseWindow" Content="关闭" VerticalAlignment="Center" HorizontalAlignment="Right"/>
                                     </Grid>

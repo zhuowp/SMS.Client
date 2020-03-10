@@ -42,7 +42,7 @@ namespace SMS.Client.Controls
     ///     <MyNamespace:LineTextTag/>
     ///
     /// </summary>
-    public class LineTextTag : Control
+    public class LineTextTag : LineTextTagBase
     {
         static LineTextTag()
         {

@@ -47,7 +47,7 @@ namespace SMS.Client.BusinessComponent
     {
         #region Fields
 
-        private RealtimePlayer _player = null;
+        private PtzController _ptzController = null;
         private WindowPanel _winPanel = null;
         private TagContainer _tagContainer = null;
         private Grid _gridTitle = null;
@@ -56,27 +56,16 @@ namespace SMS.Client.BusinessComponent
 
         #region Properties
 
-        public RealtimePlayer Player
-        {
-            get { return _player; }
-        }
+        public RealtimePlayer Player { get; private set; }
+        public Window ContainerWindow { get; private set; }
 
         #endregion
 
         #region Dependency Properties
 
-        public static readonly DependencyProperty TitleProperty =
-            DependencyProperty.Register("Title", typeof(string), typeof(RealtimeMonitorView), new PropertyMetadata(string.Empty));
-
         #endregion
 
         #region Dependency Property Wrappers
-
-        public string Title
-        {
-            get { return (string)GetValue(TitleProperty); }
-            set { SetValue(TitleProperty, value); }
-        }
 
         #endregion
 
@@ -91,13 +80,16 @@ namespace SMS.Client.BusinessComponent
 
         #region Private Methods
 
-        private void _gridTitle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void PtzController_PtzControl(object sender, RoutedEventArgs e)
+        {
+            PtzControlRoutedEventArgs args = e as PtzControlRoutedEventArgs;
+            Player?.PTZControl(args.PtzControlType, args.StopFlag, args.Speed);
+        }
+
+        private void GridTitle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Window window = LVTreeHelper.GetVisualParent<Window>(this);
-            if (window != null)
-            {
-                window.DragMove();
-            }
+            window?.DragMove();
         }
 
         #endregion
@@ -111,13 +103,26 @@ namespace SMS.Client.BusinessComponent
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            _player = GetTemplateChild("PART_Player") as RealtimePlayer;
-            _winPanel = GetTemplateChild("PART_TopmostPanel") as WindowPanel;
-            _tagContainer = GetTemplateChild("PART_TagContainer") as TagContainer;
-            _gridTitle = GetTemplateChild("PART_Title") as Grid;
-            if(_gridTitle != null)
+            Player = GetTemplateChild("PART_Player") as RealtimePlayer;
+
+            _ptzController = GetTemplateChild("PART_PtzController") as PtzController;
+            if (_ptzController != null)
             {
-                _gridTitle.MouseLeftButtonDown += _gridTitle_MouseLeftButtonDown; ;
+                _ptzController.PtzControl += PtzController_PtzControl;
+            }
+
+            _winPanel = GetTemplateChild("PART_TopmostPanel") as WindowPanel;
+            if (_winPanel != null)
+            {
+                ContainerWindow = _winPanel.ContainerWindow;
+            }
+
+            _tagContainer = GetTemplateChild("PART_TagContainer") as TagContainer;
+
+            _gridTitle = GetTemplateChild("PART_Title") as Grid;
+            if (_gridTitle != null)
+            {
+                _gridTitle.MouseLeftButtonDown += GridTitle_MouseLeftButtonDown;
             }
         }
 
