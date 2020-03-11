@@ -20,7 +20,6 @@ namespace SMS.Client.Controls
         #region Properties
 
         public string Id { get; set; }
-        public bool IsExpired { get; set; }
 
         #endregion
 

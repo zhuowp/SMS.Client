@@ -1,17 +1,138 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:SMS.Client.Controls">
-    <Style TargetType="{x:Type local:LineTextTag}">
-        <Setter Property="Template">
+
+    <Storyboard x:Key="TagLocationStoryboard" RepeatBehavior="Forever">
+        <DoubleAnimation BeginTime="0" Duration="0:0:0.7" From="0" To="1" 
+                         FillBehavior="Stop" AutoReverse="True" Storyboard.TargetProperty="(UIElement.Opacity)"/>
+    </Storyboard>
+
+    <Storyboard x:Key="TagWarningStoryboard" RepeatBehavior="Forever">
+        <DoubleAnimation BeginTime="0" Storyboard.TargetName="PART_WarningAnimation" 
+                                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                                                 From="1" To="2" Duration="00:00:01" />
+        <DoubleAnimation BeginTime="0" Storyboard.TargetName="PART_WarningAnimation" 
+                                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                                                                 From="1" To="2" Duration="00:00:01" />
+        <DoubleAnimation BeginTime="0" Storyboard.TargetName="PART_WarningAnimation" Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                                 From="1" To="0" Duration="00:00:01" />
+    </Storyboard>
+
+    <Style TargetType="CheckBox" x:Key="TagCheckBoxStyle">
+        <Setter Property="Template"  >
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:LineTextTag}">
-                    <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
-                        <Grid Background="Red" Width="100" Height="100"/>
-                    </Border>
+                <ControlTemplate TargetType="CheckBox">
+                    <Grid>
+                        <Border Background="White" Opacity="0.01"/>
+                        <Image x:Name="img" Source="..\Images\TagIconNew\pulldown_gray.png" Width="20" VerticalAlignment="Stretch"  HorizontalAlignment="Center"/>
+                        <Image x:Name="img1" Source="..\Images\TagIconNew\pulldown_gray.png" Width="20" 
+                               VerticalAlignment="Stretch"  HorizontalAlignment="Center" Visibility="Collapsed"
+                               RenderTransformOrigin="0.5, 0.5">
+                            <Image.RenderTransform>
+                                <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleY="-1"/>
+                            </Image.RenderTransform>
+                        </Image>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="img" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="img1" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style TargetType="{x:Type local:LineTextTag}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:LineTextTag}">
+                    <Canvas x:Name="PART_Root">
+                        <Grid x:Name="PART_TextTag" Cursor="Hand" ToolTip="{TemplateBinding TagName}">
+                            <Grid Width="122" Height="38" Margin="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <!--<ctrl:BeveledAngleBorder x:Name="PART_Outline" Panel.ZIndex="10" Grid.ColumnSpan="3"
+                                                 CornerRadius="18,0,0,18" BorderThickness="1"
+                                                 BorderBrush="{TemplateBinding TextTagBorderBrush}"/>
+
+                                <ctrl:BeveledAngleBorder x:Name="PART_InnerBackground" Height="31" Width="115" Grid.ColumnSpan="3"
+                                                 CornerRadius="16,0,0,16" BorderThickness="0"
+                                                 Background="{TemplateBinding TextTagBackground}"/>
+
+                                <ctrl:BeveledAngleBorder x:Name="PART_Effect" Height="31" Width="112" Grid.ColumnSpan="3" 
+                                                 CornerRadius="15,0,0,15" BorderThickness="0"
+                                                 Background="{TemplateBinding TextTagBackground}">
+                                    <ctrl:BeveledAngleBorder.Effect>
+                                        <BlurEffect Radius="20" KernelType="Box" RenderingBias="Quality"/>
+                                    </ctrl:BeveledAngleBorder.Effect>
+                                </ctrl:BeveledAngleBorder>-->
+
+                                <TextBlock x:Name="PART_Title" Text="{TemplateBinding TagName}" Grid.ColumnSpan="3"
+                                   VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20,0,0,0" 
+                                   Foreground="White" FontSize="16" FontFamily="Microsoft Yahei" ToolTip="{TemplateBinding TagName}"/>
+
+                                <CheckBox x:Name="PART_CheckBoxLeft" Grid.Column="0" Visibility="Collapsed" Panel.ZIndex="99"
+                                          Style="{StaticResource TagCheckBoxStyle}"
+                                          IsChecked="{Binding IsChecked, RelativeSource={RelativeSource AncestorType=local:TagBase, Mode=FindAncestor}, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                                <CheckBox x:Name="PART_CheckBoxRight" Grid.Column="2" Visibility="Collapsed" Panel.ZIndex="99"
+                                          Style="{StaticResource TagCheckBoxStyle}"
+                                          IsChecked="{Binding IsChecked, RelativeSource={RelativeSource AncestorType=local:TagBase, Mode=FindAncestor}, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                            </Grid>
+
+                            <Grid Name="PART_LocateAnimation" Grid.Row="1" Visibility="Collapsed">
+                                <Grid.Triggers>
+                                    <EventTrigger RoutedEvent="Loaded">
+                                        <BeginStoryboard Storyboard="{StaticResource TagLocationStoryboard}">
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </Grid.Triggers>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition MaxHeight="20"/>
+                                    <RowDefinition />
+                                    <RowDefinition MaxHeight="20"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition MaxWidth="20"/>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition MaxWidth="20"/>
+                                </Grid.ColumnDefinitions>
+                                <Border BorderBrush="Red" BorderThickness="4,4,0,0"/>
+                                <Border Grid.Column="2" BorderBrush="Red" BorderThickness="0,4,4,0"/>
+                                <Border Grid.Row="2" BorderBrush="Red" BorderThickness="4,0,0,4"/>
+                                <Border Grid.Column="2" Grid.Row="2" BorderBrush="Red" BorderThickness="0,0,4,4"/>
+                            </Grid>
+                        </Grid>
+                        <Ellipse Width="6" Height="6" Fill="{TemplateBinding TextTagBorderBrush}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-3,-3,0,0"/>
+                        <Line x:Name="PART_Line1" X1="0" Y1="0" X2="50" Y2="-50" Stroke="{TemplateBinding TextTagBorderBrush}" StrokeThickness="1"/>
+                        <Line x:Name="PART_Line2" X1="50" Y1="-50" X2="75" Y2="-50" Stroke="{TemplateBinding TextTagBorderBrush}" StrokeThickness="1"/>
+
+                        <Ellipse x:Name="PART_WarningAnimation" Grid.Row="2" RenderTransformOrigin="0.5,0.5" IsHitTestVisible="False" Visibility="Collapsed"
+                                     Height="20" Width="50" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-25,-10,0,0" Panel.ZIndex="-1">
+                            <Ellipse.Triggers>
+                                <EventTrigger RoutedEvent="Loaded">
+                                    <BeginStoryboard Storyboard="{StaticResource TagWarningStoryboard}"/>
+                                </EventTrigger>
+                            </Ellipse.Triggers>
+                            <Ellipse.RenderTransform>
+                                <ScaleTransform />
+                            </Ellipse.RenderTransform>
+                            <Ellipse.Fill>
+                                <RadialGradientBrush>
+                                    <GradientStop Color="#00FF0000" />
+                                    <GradientStop Color="#FFFF0000" Offset="0.6" />
+                                    <GradientStop Color="#00FF0000" Offset="0.25" />
+                                </RadialGradientBrush>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                    </Canvas>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

@@ -200,7 +200,6 @@ namespace SMS.Client.Controls
             if (tag != null)
             {
                 tag.Id = tagModel.Id;
-                tag.IsExpired = false;
                 tag.DataContext = tagModel;
             }
 
