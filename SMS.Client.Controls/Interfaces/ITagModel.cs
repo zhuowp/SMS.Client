@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System.Windows;
 
 namespace SMS.Client.Controls
 {
-    public interface ITagModel
+    public interface ITagModel : INotifyPropertyChanged
     {
         string Id { get; set; }
         string TagName { get; set; }

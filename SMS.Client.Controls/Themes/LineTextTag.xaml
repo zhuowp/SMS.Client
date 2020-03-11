@@ -8,6 +8,7 @@
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid Background="Red" Width="100" Height="100"/>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

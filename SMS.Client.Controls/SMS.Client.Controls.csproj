@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SMS.Client.Log\SMS.Client.Log.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Page Update="Themes\EagleEye.xaml">
       <SubType>Designer</SubType>
     </Page>
