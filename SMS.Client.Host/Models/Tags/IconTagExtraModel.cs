@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
+using SMS.Client.Controls;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Windows.Media;
 
 namespace SMS.Client.Host.Models.Tags
 {
-    public class IconTagExtraModel : ViewModelBase
+    public class IconTagExtraModel : ViewModelBase, ITagExtraModel
     {
         #region Fields
 

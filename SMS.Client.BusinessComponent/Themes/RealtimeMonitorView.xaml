@@ -33,7 +33,7 @@
                                         </Grid.ColumnDefinitions>
                                         <Border x:Name="borderHeader" Grid.ColumnSpan="3" Background="White" Opacity="0.01" Height="50"/>
                                         <Grid Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                                            <Border Background="Blue" Opacity="0.3"/>
+                                            <Border Background="Blue" Opacity="0.4" CornerRadius="0,0,50,50"/>
                                             <TextBlock Text="{Binding Title}" Foreground="White" FontSize="24" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,0,20,0"/>
                                         </Grid>
 

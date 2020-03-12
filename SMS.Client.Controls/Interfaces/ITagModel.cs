@@ -15,7 +15,7 @@ namespace SMS.Client.Controls
         bool IsCheckable { get; set; }
         bool IsChecked { get; set; }
         bool IsTagEnabled { get; set; }
-        object ExtraData { get; set; }
+        ITagExtraModel ExtraData { get; set; }
         TagType Type { get; set; }
         object Data { get; set; }
     }

@@ -8,6 +8,21 @@
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
+                        <Canvas x:Name="PART_Root">
+                            <Canvas x:Name="PART_Area">
+                            </Canvas>
+
+                            <local:LineTextTag x:Name="PART_TextTag"
+                                     Location="{TemplateBinding TextTagLocation}"
+                                     TextTagXOffset="{TemplateBinding TextTagXOffset}"
+                                     TextTagYOffset="{TemplateBinding TextTagYOffset}"
+                                     TextTagBackground="{TemplateBinding TextTagBackground}"
+                                     TextTagBorderBrush="{TemplateBinding TextTagBorderBrush}"
+                                     TagName="{TemplateBinding TagName}"
+                                     TagNameVisibility="{TemplateBinding TagNameVisibility}"
+                                     IsCheckable="{TemplateBinding IsCheckable}"
+                                     IsChecked="{TemplateBinding IsCheckable}"/>
+                        </Canvas>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

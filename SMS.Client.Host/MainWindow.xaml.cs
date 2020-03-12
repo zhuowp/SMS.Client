@@ -35,6 +35,7 @@ namespace SMS.Client
 
         private void RealtimeMonitorView_CloseWindow()
         {
+            realtimeMonitorView.Dispose();
             Close();
         }
 

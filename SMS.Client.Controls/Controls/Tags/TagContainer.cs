@@ -51,10 +51,11 @@ namespace SMS.Client.Controls
     ///     <MyNamespace:TagContainer/>
     ///
     /// </summary>
-    public class TagContainer : Control
+    public class TagContainer : Control, IDisposable
     {
         #region Fields
 
+        private bool _isRefreshingTags = true;
         private Canvas _canvasTags = null;
         private bool _isTagRefreshThreadInit = false;
         private bool _isInitializeTags = false;
@@ -182,7 +183,7 @@ namespace SMS.Client.Controls
 
         private void ContinuousRefreshTags()
         {
-            while (true)
+            while (_isRefreshingTags)
             {
                 try
                 {
@@ -424,6 +425,11 @@ namespace SMS.Client.Controls
         {
             base.OnApplyTemplate();
             _canvasTags = GetTemplateChild("PART_TagCanvas") as Canvas;
+        }
+
+        public void Dispose()
+        {
+            _isRefreshingTags = false;
         }
 
         #endregion

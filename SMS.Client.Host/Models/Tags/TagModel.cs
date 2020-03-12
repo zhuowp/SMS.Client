@@ -19,7 +19,7 @@ namespace SMS.Client.Host.Models.Tags
         private bool _isCheckable = true;
         private bool _isChecked = false;
         private bool _isTagEnabled = true;
-        private object _extraData = null;
+        private ITagExtraModel _extraData = null;
         private object _data = null;
 
         #endregion
@@ -130,7 +130,7 @@ namespace SMS.Client.Host.Models.Tags
             }
         }
 
-        public object ExtraData
+        public ITagExtraModel ExtraData
         {
             get
             {

@@ -43,7 +43,7 @@ namespace SMS.Client.BusinessComponent
     ///     <MyNamespace:RealtimeMonitorView/>
     ///
     /// </summary>
-    public class RealtimeMonitorView : Control
+    public class RealtimeMonitorView : Control, IDisposable
     {
         #region Fields
 
@@ -138,6 +138,11 @@ namespace SMS.Client.BusinessComponent
             {
                 _btnClose.Click += _btnClose_Click;
             }
+        }
+
+        public void Dispose()
+        {
+            _tagContainer?.Dispose();
         }
 
         #endregion
