@@ -227,6 +227,8 @@ namespace SMS.Client.Controls
 
             _vectorCanvas = GetTemplateChild("PART_Area") as Canvas;
             _lineTextTag = GetTemplateChild("PART_TextTag") as LineTextTag;
+
+            UpdateTagLocationInScreen();
         }
 
         public override void StartWarningAnimation()

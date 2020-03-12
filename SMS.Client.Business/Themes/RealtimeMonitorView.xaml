@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:SMS.Client.BusinessComponent"
+                    xmlns:local="clr-namespace:SMS.Client.Business"
                     xmlns:ctrl="clr-namespace:SMS.Client.Controls;assembly=SMS.Client.Controls">
     <Style TargetType="{x:Type local:RealtimeMonitorView}">
         <Setter Property="Template">

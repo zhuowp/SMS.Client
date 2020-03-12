@@ -75,6 +75,32 @@ namespace SMS.Client.Host.ViewModels
                 }
             };
             TagCollection.Add(tagModel2);
+
+            TagModel tagModel3 = new TagModel()
+            {
+                Id = "342124",
+                TagName = "Test Area Tag 1",
+                Type = TagType.Area,
+                Location = new Point(500, 300),
+                ExtraData = new AreaTagExtraModel()
+                {
+                    AreaPoints = new ObservableCollection<Point>() { new Point(500, 300), new Point(500, 350), new Point(400, 330) }
+                },
+            };
+            TagCollection.Add(tagModel3);
+
+            TagModel tagModel4 = new TagModel()
+            {
+                Id = "reqewuip",
+                TagName = "Test Vector Tag 1",
+                Type = TagType.Vector,
+                Location = new Point(200, 300),
+                ExtraData = new VectorTagExtraModel()
+                {
+                    AreaPoints = new ObservableCollection<Point>() { new Point(200, 200), new Point(500, 200) }
+                },
+            };
+            TagCollection.Add(tagModel4);
         }
 
         #endregion

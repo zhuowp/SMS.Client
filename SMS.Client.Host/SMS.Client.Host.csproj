@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SMS.Client.BusinessComponent\SMS.Client.BusinessComponent.csproj" />
+    <ProjectReference Include="..\SMS.Client.Business\SMS.Client.Business.csproj" />
     <ProjectReference Include="..\SMS.Client.Controls\SMS.Client.Controls.csproj" />
     <ProjectReference Include="..\SMS.Client.Log\SMS.Client.Log.csproj" />
     <ProjectReference Include="..\SMS.Client.Theme\SMS.Client.Theme.csproj" />
