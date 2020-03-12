@@ -21,6 +21,7 @@
                                         <RowDefinition Height="auto"/>
                                     </Grid.RowDefinitions>
 
+                                    <!--标签容器-->
                                     <ctrl:TagContainer x:Name="PART_TagContainer" Grid.RowSpan="2" TagItemsSource="{Binding TagCollection}"/>
 
                                     <!--标题栏-->
@@ -31,13 +32,13 @@
                                             <ColumnDefinition/>
                                         </Grid.ColumnDefinitions>
                                         <Border x:Name="borderHeader" Grid.ColumnSpan="3" Background="White" Opacity="0.01" Height="50"/>
-                                        <Grid Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Center">
+                                        <Grid Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                                             <Border Background="Blue" Opacity="0.3"/>
                                             <TextBlock Text="{Binding Title}" Foreground="White" FontSize="24" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20,0,20,0"/>
                                         </Grid>
 
                                         <Grid Grid.Column="2" HorizontalAlignment="Right">
-                                            <Button x:Name="btnCloseWindow" Content="关闭" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                                            <Button x:Name="PART_Close" Content="关闭" VerticalAlignment="Center" HorizontalAlignment="Right"/>
                                         </Grid>
                                     </Grid>
 

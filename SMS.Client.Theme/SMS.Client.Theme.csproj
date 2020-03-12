@@ -5,4 +5,34 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Images\DeviceIcons\box_camera_blue.png" />
+    <None Remove="Images\DeviceIcons\box_camera_dark.png" />
+    <None Remove="Images\DeviceIcons\box_camera_gray.png" />
+    <None Remove="Images\DeviceIcons\dome_camera_blue.png" />
+    <None Remove="Images\DeviceIcons\dome_camera_dark.png" />
+    <None Remove="Images\DeviceIcons\dome_camera_gray.png" />
+    <None Remove="Images\DeviceIcons\heavyptz_camera_blue.png" />
+    <None Remove="Images\DeviceIcons\heavyptz_camera_dark.png" />
+    <None Remove="Images\DeviceIcons\heavyptz_camera_gray.png" />
+    <None Remove="Images\DeviceIcons\panoramic_camera_blue.png" />
+    <None Remove="Images\DeviceIcons\panoramic_camera_dark.png" />
+    <None Remove="Images\DeviceIcons\panoramic_camera_gray.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\DeviceIcons\box_camera_blue.png" />
+    <Resource Include="Images\DeviceIcons\box_camera_dark.png" />
+    <Resource Include="Images\DeviceIcons\box_camera_gray.png" />
+    <Resource Include="Images\DeviceIcons\dome_camera_blue.png" />
+    <Resource Include="Images\DeviceIcons\dome_camera_dark.png" />
+    <Resource Include="Images\DeviceIcons\dome_camera_gray.png" />
+    <Resource Include="Images\DeviceIcons\heavyptz_camera_blue.png" />
+    <Resource Include="Images\DeviceIcons\heavyptz_camera_dark.png" />
+    <Resource Include="Images\DeviceIcons\heavyptz_camera_gray.png" />
+    <Resource Include="Images\DeviceIcons\panoramic_camera_blue.png" />
+    <Resource Include="Images\DeviceIcons\panoramic_camera_dark.png" />
+    <Resource Include="Images\DeviceIcons\panoramic_camera_gray.png" />
+  </ItemGroup>
+
 </Project>

@@ -1,0 +1,16 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:SMS.Client.Theme.Themes">
+    <ImageSource x:Key="box_camera_blue">..\Images\DeviceIcons\box_camera_blue.png</ImageSource>
+    <ImageSource x:Key="box_camera_dark">..\Images\DeviceIcons\box_camera_dark.png</ImageSource>
+    <ImageSource x:Key="box_camera_gray">..\Images\DeviceIcons\box_camera_gray.png</ImageSource>
+    <ImageSource x:Key="dome_camera_blue">..\Images\DeviceIcons\dome_camera_blue.png</ImageSource>
+    <ImageSource x:Key="dome_camera_dark">..\Images\DeviceIcons\dome_camera_dark.png</ImageSource>
+    <ImageSource x:Key="dome_camera_gray">..\Images\DeviceIcons\dome_camera_gray.png</ImageSource>
+    <ImageSource x:Key="heavyptz_camera_blue">..\Images\DeviceIcons\heavyptz_camera_blue.png</ImageSource>
+    <ImageSource x:Key="heavyptz_camera_dark">..\Images\DeviceIcons\heavyptz_camera_dark.png</ImageSource>
+    <ImageSource x:Key="heavyptz_camera_gray">..\Images\DeviceIcons\heavyptz_camera_gray.png</ImageSource>
+    <ImageSource x:Key="panoramic_camera_blue">..\Images\DeviceIcons\panoramic_camera_blue.png</ImageSource>
+    <ImageSource x:Key="panoramic_camera_dark">..\Images\DeviceIcons\panoramic_camera_dark.png</ImageSource>
+    <ImageSource x:Key="panoramic_camera_gray">..\Images\DeviceIcons\panoramic_camera_gray.png</ImageSource>
+</ResourceDictionary>

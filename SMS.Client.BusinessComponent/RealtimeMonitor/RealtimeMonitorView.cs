@@ -51,6 +51,9 @@ namespace SMS.Client.BusinessComponent
         private WindowPanel _winPanel = null;
         private TagContainer _tagContainer = null;
         private Grid _gridTitle = null;
+        private Button _btnClose = null;
+
+        public event Action CloseWindow;
 
         #endregion
 
@@ -92,6 +95,11 @@ namespace SMS.Client.BusinessComponent
             window?.DragMove();
         }
 
+        private void _btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            CloseWindow?.Invoke();
+        }
+
         #endregion
 
         #region Protected Methods
@@ -123,6 +131,12 @@ namespace SMS.Client.BusinessComponent
             if (_gridTitle != null)
             {
                 _gridTitle.MouseLeftButtonDown += GridTitle_MouseLeftButtonDown;
+            }
+
+            _btnClose = GetTemplateChild("PART_Close") as Button;
+            if (_btnClose != null)
+            {
+                _btnClose.Click += _btnClose_Click;
             }
         }
 

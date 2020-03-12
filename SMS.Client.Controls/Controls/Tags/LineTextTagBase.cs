@@ -116,6 +116,11 @@ namespace SMS.Client.Controls
 
         #region Constructors
 
+        static LineTextTagBase()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(LineTextTagBase), new FrameworkPropertyMetadata(typeof(LineTextTagBase)));
+        }
+
         public LineTextTagBase()
         {
             SizeChanged += LineTextTagBase_SizeChanged;

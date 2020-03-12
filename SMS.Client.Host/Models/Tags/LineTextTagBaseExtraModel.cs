@@ -12,8 +12,8 @@ namespace SMS.Client.Host.Models.Tags
 
         private double _textTagXOffset = 75;
         private double _textTagYOffset = -50;
-        private Brush _textTagBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#6C92FA"));
-        private Brush _textTagBorderBrush = new SolidColorBrush(Colors.White);
+        private Brush _textTagBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#AA6C92FA"));
+        private Brush _textTagBorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#6C92FA"));
 
         #endregion
 

@@ -63,13 +63,13 @@ namespace SMS.Client.Controls
             DependencyProperty.Register("IconHeight", typeof(double), typeof(IconTag), new PropertyMetadata(44.0));
 
         public static readonly DependencyProperty IconProperty =
-            DependencyProperty.Register("Icon", typeof(string), typeof(IconTag), new PropertyMetadata(""));
+            DependencyProperty.Register("Icon", typeof(ImageSource), typeof(IconTag), new PropertyMetadata(null));
 
         public static readonly DependencyProperty MouseOverIconProperty =
-            DependencyProperty.Register("MouseOverIcon", typeof(string), typeof(IconTag), new PropertyMetadata(""));
+            DependencyProperty.Register("MouseOverIcon", typeof(ImageSource), typeof(IconTag), new PropertyMetadata(null));
 
         public static readonly DependencyProperty MouseDownIconProperty =
-            DependencyProperty.Register("MouseDownIcon", typeof(string), typeof(IconTag), new PropertyMetadata(""));
+            DependencyProperty.Register("MouseDownIcon", typeof(ImageSource), typeof(IconTag), new PropertyMetadata(null));
 
         #endregion
 
@@ -87,21 +87,21 @@ namespace SMS.Client.Controls
             set { SetValue(IconHeightProperty, value); }
         }
 
-        public string Icon
+        public ImageSource Icon
         {
-            get { return (string)GetValue(IconProperty); }
+            get { return (ImageSource)GetValue(IconProperty); }
             set { SetValue(IconProperty, value); }
         }
 
-        public string MouseOverIcon
+        public ImageSource MouseOverIcon
         {
-            get { return (string)GetValue(MouseOverIconProperty); }
+            get { return (ImageSource)GetValue(MouseOverIconProperty); }
             set { SetValue(MouseOverIconProperty, value); }
         }
 
-        public string MouseDownIcon
+        public ImageSource MouseDownIcon
         {
-            get { return (string)GetValue(MouseDownIconProperty); }
+            get { return (ImageSource)GetValue(MouseDownIconProperty); }
             set { SetValue(MouseDownIconProperty, value); }
         }
 

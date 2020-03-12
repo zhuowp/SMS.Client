@@ -24,20 +24,20 @@
                 <ControlTemplate TargetType="CheckBox">
                     <Grid>
                         <Border Background="White" Opacity="0.01"/>
-                        <Image x:Name="img" Source="..\Images\TagIconNew\pulldown_gray.png" Width="20" VerticalAlignment="Stretch"  HorizontalAlignment="Center"/>
+                        <!--<Image x:Name="img" Source="..\Images\TagIconNew\pulldown_gray.png" Width="20" VerticalAlignment="Stretch"  HorizontalAlignment="Center"/>
                         <Image x:Name="img1" Source="..\Images\TagIconNew\pulldown_gray.png" Width="20" 
                                VerticalAlignment="Stretch"  HorizontalAlignment="Center" Visibility="Collapsed"
                                RenderTransformOrigin="0.5, 0.5">
                             <Image.RenderTransform>
                                 <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleY="-1"/>
                             </Image.RenderTransform>
-                        </Image>
+                        </Image>-->
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsChecked" Value="True">
+                        <!--<Trigger Property="IsChecked" Value="True">
                             <Setter TargetName="img" Property="Visibility" Value="Collapsed"/>
                             <Setter TargetName="img1" Property="Visibility" Value="Visible"/>
-                        </Trigger>
+                        </Trigger>-->
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -56,25 +56,13 @@
                                     <ColumnDefinition/>
                                     <ColumnDefinition Width="auto"/>
                                 </Grid.ColumnDefinitions>
-                                <!--<ctrl:BeveledAngleBorder x:Name="PART_Outline" Panel.ZIndex="10" Grid.ColumnSpan="3"
-                                                 CornerRadius="18,0,0,18" BorderThickness="1"
-                                                 BorderBrush="{TemplateBinding TextTagBorderBrush}"/>
-
-                                <ctrl:BeveledAngleBorder x:Name="PART_InnerBackground" Height="31" Width="115" Grid.ColumnSpan="3"
-                                                 CornerRadius="16,0,0,16" BorderThickness="0"
-                                                 Background="{TemplateBinding TextTagBackground}"/>
-
-                                <ctrl:BeveledAngleBorder x:Name="PART_Effect" Height="31" Width="112" Grid.ColumnSpan="3" 
-                                                 CornerRadius="15,0,0,15" BorderThickness="0"
-                                                 Background="{TemplateBinding TextTagBackground}">
-                                    <ctrl:BeveledAngleBorder.Effect>
-                                        <BlurEffect Radius="20" KernelType="Box" RenderingBias="Quality"/>
-                                    </ctrl:BeveledAngleBorder.Effect>
-                                </ctrl:BeveledAngleBorder>-->
+                                <Border x:Name="PART_Border" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                        Background="{TemplateBinding TextTagBackground}" CornerRadius="2" BorderThickness="2"
+                                        BorderBrush="{TemplateBinding TextTagBorderBrush}"/>
 
                                 <TextBlock x:Name="PART_Title" Text="{TemplateBinding TagName}" Grid.ColumnSpan="3"
-                                   VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20,0,0,0" 
-                                   Foreground="White" FontSize="16" FontFamily="Microsoft Yahei" ToolTip="{TemplateBinding TagName}"/>
+                                           VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20,0,0,0" 
+                                           Foreground="White" FontSize="16" FontFamily="Microsoft Yahei" ToolTip="{TemplateBinding TagName}"/>
 
                                 <CheckBox x:Name="PART_CheckBoxLeft" Grid.Column="0" Visibility="Collapsed" Panel.ZIndex="99"
                                           Style="{StaticResource TagCheckBoxStyle}"

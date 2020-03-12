@@ -3,6 +3,7 @@ using SMS.Client.Controls;
 using SMS.Client.Host.Models.Tags;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Media;
 
 namespace SMS.Client.Host.ViewModels
 {
@@ -49,16 +50,31 @@ namespace SMS.Client.Host.ViewModels
 
         public RealtimeMonitorViewModel()
         {
-            TagModel tagModel = new TagModel()
+            TagModel tagModel1 = new TagModel()
             {
                 Id = "34132",
-                TagName = "Test Tag 1",
+                TagName = "Test Text Tag 1",
                 Type = TagType.Text,
                 Location = new Point(300, 300),
+                ExtraData = new TextTagExtraModel()
+                {
+                    TextTagBorderBrush = Brushes.AliceBlue
+                }
             };
-            tagModel.ExtraData = new TextTagExtraModel();
+            TagCollection.Add(tagModel1);
 
-            TagCollection.Add(tagModel);
+            TagModel tagModel2 = new TagModel()
+            {
+                Id = "3ew41",
+                TagName = "Test Icon Tag 1",
+                Type = TagType.Icon,
+                Location = new Point(400, 300),
+                ExtraData = new IconTagExtraModel()
+                {
+                    Icon = Application.Current.Resources["box_camera_blue"] as ImageSource,
+                }
+            };
+            TagCollection.Add(tagModel2);
         }
 
         #endregion

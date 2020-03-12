@@ -56,13 +56,13 @@ namespace SMS.Client.Controls
         #region Fields
 
         private Canvas _canvasTags = null;
+        private bool _isTagRefreshThreadInit = false;
         private bool _isInitializeTags = false;
         private bool _isResetTags = false;
         private ObservableCollection<ITagModel> _toInitializeTags = null;
         private readonly List<ITagModel> _addTagList = new List<ITagModel>();
         private readonly List<ITagModel> _updateTagList = new List<ITagModel>();
         private readonly List<ITagModel> _removeTagList = new List<ITagModel>();
-        private readonly ConcurrentDictionary<string, ITagModel> _tagModelDict = new ConcurrentDictionary<string, ITagModel>();
         private readonly ConcurrentDictionary<string, TagBase> _tagCacheDict = new ConcurrentDictionary<string, TagBase>();
         private readonly object _lock = new object();
 
@@ -71,6 +71,7 @@ namespace SMS.Client.Controls
         public event Action<TagBase, MouseButtonEventArgs> TagPreviewMouseLeftButtonUp;
         public event Action<TagBase, MouseEventArgs> TagPreviewMouseMove;
         public event Action<TagBase, RoutedEventArgs> TagClick;
+        public event Action<TagBase, ITagModel> TagLocationChanged;
 
         #endregion
 
@@ -121,7 +122,7 @@ namespace SMS.Client.Controls
 
         public TagContainer()
         {
-            Task.Factory.StartNew(ContinuousRefreshTags, TaskCreationOptions.LongRunning);
+            Loaded += TagContainer_Loaded;
         }
 
         #endregion
@@ -144,6 +145,15 @@ namespace SMS.Client.Controls
             if (newTagsSource != null)
             {
                 newTagsSource.CollectionChanged += tagContainer.TagsSource_CollectionChanged;
+            }
+        }
+
+        private void TagContainer_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (!_isTagRefreshThreadInit)
+            {
+                _isTagRefreshThreadInit = true;
+                Task.Factory.StartNew(ContinuousRefreshTags, TaskCreationOptions.LongRunning);
             }
         }
 
@@ -194,6 +204,9 @@ namespace SMS.Client.Controls
 
         private bool TryRefreshTagsDisplay()
         {
+            //重置所有标签
+            bool resetResult = TryResetTagsDisplay();
+
             //初始化所有标签
             bool initResult = TryInitializeTagsDisplay(_toInitializeTags);
 
@@ -206,7 +219,20 @@ namespace SMS.Client.Controls
             //移除所有指定标签
             bool removeResult = TryRemoveTags();
 
-            return initResult || addResult || updateResult || removeResult;
+            return resetResult || initResult || addResult || updateResult || removeResult;
+        }
+
+        private bool TryResetTagsDisplay()
+        {
+            bool result = false;
+
+            if (_isResetTags)
+            {
+                _isResetTags = false;
+                ClearAllTags(_tagCacheDict);
+            }
+
+            return result;
         }
 
         private bool TryInitializeTagsDisplay(IList<ITagModel> tagModels)
@@ -282,8 +308,7 @@ namespace SMS.Client.Controls
             foreach (var existTag in tagCacheDict.Values)
             {
                 _canvasTags.Children.Remove(existTag);
-                ITagModel tagModel = existTag.DataContext as ITagModel;
-                if (tagModel != null)
+                if (existTag.DataContext is ITagModel tagModel)
                 {
                     tagModel.PropertyChanged -= TagModel_PropertyChanged;
                 }
@@ -313,8 +338,7 @@ namespace SMS.Client.Controls
         {
             if (tagCacheDict.TryGetValue(updateTagModel.Id, out TagBase tagBase))
             {
-                ITagModel oldTagModel = tagBase.DataContext as ITagModel;
-                if (oldTagModel != null)
+                if (tagBase.DataContext is ITagModel oldTagModel)
                 {
                     oldTagModel.PropertyChanged -= TagModel_PropertyChanged;
                 }
@@ -337,8 +361,7 @@ namespace SMS.Client.Controls
 
                 _canvasTags.Children.Remove(tagBase);
 
-                ITagModel tagModel = tagBase.DataContext as ITagModel;
-                if (tagModel != null)
+                if (tagBase.DataContext is ITagModel tagModel)
                 {
                     tagModel.PropertyChanged -= TagModel_PropertyChanged;
                 }
@@ -351,35 +374,39 @@ namespace SMS.Client.Controls
 
         private void Tag_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            TagPreviewMouseLeftButtonUp.Invoke((TagBase)sender, e);
+            TagPreviewMouseLeftButtonUp?.Invoke((TagBase)sender, e);
         }
 
         private void Tag_PreviewMouseMove(object sender, MouseEventArgs e)
         {
-            TagPreviewMouseMove.Invoke((TagBase)sender, e);
+            TagPreviewMouseMove?.Invoke((TagBase)sender, e);
         }
 
         private void Tag_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            TagPreviewMouseLeftButtonDown.Invoke((TagBase)sender, e);
+            TagPreviewMouseLeftButtonDown?.Invoke((TagBase)sender, e);
         }
 
         private void Tag_PreviewMouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
-            TagPreviewMouseRightButtonUp.Invoke((TagBase)sender, e);
+            TagPreviewMouseRightButtonUp?.Invoke((TagBase)sender, e);
         }
 
         private void Tag_Click(object sender, RoutedEventArgs e)
         {
-            TagClick.Invoke((TagBase)sender, e);
+            TagClick?.Invoke((TagBase)sender, e);
         }
 
         private void TagModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            ITagModel tagModel = sender as ITagModel;
             if (e.PropertyName == "Location")
             {
-                Console.WriteLine("Tag Location Changed");
+                ITagModel tagModel = sender as ITagModel;
+
+                if (_tagCacheDict.TryGetValue(tagModel.Id, out TagBase tagBase))
+                {
+                    TagLocationChanged?.Invoke(tagBase, tagModel);
+                }
             }
         }
 
