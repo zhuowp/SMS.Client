@@ -7,7 +7,7 @@ using System.Windows.Forms.Integration;
 
 namespace SMS.Client.Controls
 {
-    public class PlayerBase : Control
+    public class PlayerBase : ContentControl
     {
         #region Fields
 

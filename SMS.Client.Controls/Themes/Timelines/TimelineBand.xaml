@@ -1,0 +1,63 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:SMS.Client.Controls">
+
+    <DataTemplate x:Key="TimeScaleUnitDataTemplate">
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="scaleGrid" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="0"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="1" FontSize="12" Foreground="#FFFFFFFF" FontFamily="Arial" Margin="-14,0,0,0" TextWrapping="Wrap" Text="{Binding StringFormat={}{0:HH:mm}}" />
+            <Grid Grid.Row="1" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Rectangle Grid.Column="0" Fill="White" HorizontalAlignment="Left" VerticalAlignment="Top" Height="8" Width="2"  Margin="0,-8,0,0"/>
+                <Rectangle Grid.Column="0" Grid.ColumnSpan="5"  Fill="White" HorizontalAlignment="Left"  VerticalAlignment="Top" Height="2"  Width="{Binding Path=Width,ElementName=scaleGrid}" />
+                <Rectangle Grid.Column="0" Grid.ColumnSpan="5"  Fill="White" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Height="2"  Width="{Binding Path=Width,ElementName=scaleGrid}" />
+            </Grid>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="TimeFrameDataTemplate">
+        <Grid x:Name="timeFrameGrid" Canvas.Top="24">
+            <Rectangle Name="timeFrameRect" Opacity="0.8" Fill="#FF44B0AE" Height="20" Canvas.Left="0" Canvas.Top="20" Width="{Binding Path=Width,ElementName=timeFrameGrid}" />
+        </Grid>
+    </DataTemplate>
+
+    <Style TargetType="{x:Type local:TimelineBand}">
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="TimeScaleUnitTemplate" Value="{StaticResource TimeScaleUnitDataTemplate}"/>
+        <Setter Property="TimeFrameTemplate" Value="{StaticResource TimeFrameDataTemplate}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:TimelineBand}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Margin="{TemplateBinding Padding}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Border Background="White" Opacity="0.01" Grid.Row="1"/>
+                            <Canvas x:Name="PART_Canvas" Grid.Row="1"/>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

@@ -8,6 +8,7 @@ namespace SMS.Client.Controls
     {
         #region Fields
 
+        private bool _isClosed = false;
         private readonly Control _hostView = null;
 
         #endregion
@@ -20,9 +21,9 @@ namespace SMS.Client.Controls
 
         #region Constructors
 
-        public ContainerWindow(Control hostView)
+        public ContainerWindow(Control hostView, bool allowsTransparency = true)
         {
-            InitWindowProperty();
+            InitWindowProperty(allowsTransparency);
 
             _hostView = hostView ?? throw new Exception("The host view cannot be null!");
 
@@ -49,6 +50,7 @@ namespace SMS.Client.Controls
 
         private void ContainerWindow_Closed(object sender, EventArgs e)
         {
+            _isClosed = true;
             if (ParentWindow != null && ParentWindow.IsActive)
             {
                 ParentWindow.LocationChanged -= ParentWindow_LocationChanged;
@@ -113,10 +115,10 @@ namespace SMS.Client.Controls
 
         #region Private Methods
 
-        private void InitWindowProperty()
+        private void InitWindowProperty(bool allowsTransparency)
         {
+            AllowsTransparency = allowsTransparency;
             ShowInTaskbar = false;
-            AllowsTransparency = true;
             WindowStyle = WindowStyle.None;
             Background = null;
             ResizeMode = ResizeMode.NoResize;
@@ -124,6 +126,11 @@ namespace SMS.Client.Controls
 
         private void UpdateVisibility(Visibility visibility)
         {
+            if (_isClosed)
+            {
+                return;
+            }
+
             if (visibility == Visibility.Hidden || visibility == Visibility.Collapsed)
             {
                 Visibility = Visibility.Hidden;

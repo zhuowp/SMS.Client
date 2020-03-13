@@ -10,6 +10,9 @@
         <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/Players/RealtimePlayer.xaml"/>
         <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/Players/Replayer.xaml"/>
 
+        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/Timelines/Timeline.xaml"/>
+        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/Timelines/TimelineBand.xaml"/>
+
         <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/Tags/TagContainer.xaml"/>
         <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/Tags/IconTag.xaml"/>
         <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/Tags/LineTextTag.xaml"/>

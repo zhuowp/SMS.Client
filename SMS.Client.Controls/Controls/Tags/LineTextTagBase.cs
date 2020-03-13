@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -151,6 +152,11 @@ namespace SMS.Client.Controls
             UpdateTextTagLocation();
         }
 
+        private void TextTag_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            RaiseTagClickEvent(this, e);
+        }
+
         #endregion
 
         #region Protected Methods
@@ -218,6 +224,7 @@ namespace SMS.Client.Controls
             if (_textTag != null)
             {
                 _textTag.SizeChanged += LineTextTagBase_SizeChanged;
+                _textTag.MouseLeftButtonUp += TextTag_MouseLeftButtonUp;
             }
              
             _firstLine = GetTemplateChild("PART_Line1") as Line;

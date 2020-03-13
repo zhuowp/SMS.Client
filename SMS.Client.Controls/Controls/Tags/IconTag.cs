@@ -140,6 +140,8 @@ namespace SMS.Client.Controls
             {
                 _iconButton.Click += IconButton_Click;
             }
+
+            UpdateTagLocationInScreen();
         }
 
         #endregion

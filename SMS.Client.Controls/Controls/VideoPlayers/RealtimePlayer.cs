@@ -109,8 +109,7 @@ namespace SMS.Client.Controls
         {
             base.OnApplyTemplate();
 
-            WindowsFormsHost winFormsHost = GetTemplateChild("PART_WinFormsHost") as WindowsFormsHost;
-            if (winFormsHost != null)
+            if (GetTemplateChild("PART_WinFormsHost") is WindowsFormsHost winFormsHost)
             {
                 PlayScreenWindowsFormsHost = winFormsHost;
             }

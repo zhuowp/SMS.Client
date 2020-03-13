@@ -1,0 +1,60 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:SMS.Client.Controls">
+
+    <ItemsPanelTemplate x:Key="TimelineItemsPanelTemplate">
+        <UniformGrid Columns="1" Rows="{Binding TimelineBandsDataSourceCollection.Count, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:Timeline}}"/>
+    </ItemsPanelTemplate>
+
+    <Style x:Key="TimelineItemContainerStyle" TargetType="{x:Type ListBoxItem}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="Padding" Value="0,0,0,0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                    <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <DataTemplate x:Key="TimelineItemDataTemplate">
+        <Grid>
+            <local:TimelineBand TimeFrameCollection="{Binding TimeFrameCollection}"/>
+        </Grid>
+    </DataTemplate>
+
+    <Style TargetType="{x:Type local:Timeline}">
+        <!--<Setter Property="ItemsPanel" Value="{StaticResource TimelineItemsPanelTemplate}"/>
+        <Setter Property="ItemContainerStyle" Value="{StaticResource TimelineItemContainerStyle}"/>
+        <Setter Property="ItemTemplate" Value="{StaticResource TimelineItemDataTemplate}"/>
+        <Setter Property="ItemsSource" Value="{Binding TimelineBandsDataSourceCollection, RelativeSource={RelativeSource Mode=Self}}"/>
+        <Setter Property="BorderThickness" Value="0"/>-->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:Timeline}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid>
+                            <ScrollViewer Focusable="false" Padding="{TemplateBinding Padding}" VerticalScrollBarVisibility="Auto">
+                                <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            </ScrollViewer>
+
+                            <Border BorderBrush="Red" BorderThickness="1" Background="Red" VerticalAlignment="Stretch" HorizontalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

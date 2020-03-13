@@ -72,6 +72,9 @@ namespace SMS.Client.Controls
         public static readonly DependencyProperty ChildProperty =
             DependencyProperty.Register("Child", typeof(FrameworkElement), typeof(WindowPanel), new PropertyMetadata(null, OnChildChanged));
 
+        public static readonly DependencyProperty IsTransparentProperty =
+            DependencyProperty.Register("IsTransparent", typeof(bool), typeof(WindowPanel), new PropertyMetadata(true, OnIsTransparentChanged));
+
         #endregion
 
         #region Dependency Property Wrappers
@@ -88,6 +91,12 @@ namespace SMS.Client.Controls
             set { SetValue(ChildProperty, value); }
         }
 
+        public bool IsTransparent
+        {
+            get { return (bool)GetValue(IsTransparentProperty); }
+            set { SetValue(IsTransparentProperty, value); }
+        }
+
         #endregion
 
         #region Constructors
@@ -99,7 +108,7 @@ namespace SMS.Client.Controls
 
         public WindowPanel()
         {
-            InitContainerWindow();
+            InitContainerWindow(IsTransparent);
 
             DataContextChanged += WindowPanel_DataContextChanged;
         }
@@ -126,6 +135,15 @@ namespace SMS.Client.Controls
             }
         }
 
+        private static void OnIsTransparentChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            WindowPanel windowPanel = d as WindowPanel;
+            if(e.NewValue != e.OldValue)
+            {
+                windowPanel.InitContainerWindow((bool)e.NewValue);
+            }
+        }
+
         private void WindowPanel_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (_containerWindow != null)
@@ -134,9 +152,15 @@ namespace SMS.Client.Controls
             }
         }
 
-        private void InitContainerWindow()
+        private void InitContainerWindow(bool isAllowsTransparency)
         {
-            _containerWindow = new ContainerWindow(this)
+            if(_containerWindow != null)
+            {
+                _containerWindow.Content = null;
+                _containerWindow.Close();
+            }
+
+            _containerWindow = new ContainerWindow(this, isAllowsTransparency)
             {
                 Topmost = IsTopmost,
                 Visibility = Visibility,

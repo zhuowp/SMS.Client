@@ -1,10 +1,13 @@
-﻿using SMS.Client.Host.Helpers;
+﻿using SMS.Client.Business;
+using SMS.Client.Controls;
+using SMS.Client.Host.Helpers;
 using SMS.Client.Host.Models;
 using SMS.Client.Host.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -46,6 +49,16 @@ namespace SMS.Client
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            if (realtimeMonitorView.TagContainer != null)
+            {
+                realtimeMonitorView.TagContainer.TagPreviewMouseRightButtonUp += TagContainer_TagPreviewMouseRightButtonUp; ;
+                realtimeMonitorView.TagContainer.TagPreviewMouseLeftButtonDown += TagContainer_TagPreviewMouseLeftButtonDown; ;
+                realtimeMonitorView.TagContainer.TagPreviewMouseLeftButtonUp += TagContainer_TagPreviewMouseLeftButtonUp; ;
+                realtimeMonitorView.TagContainer.TagPreviewMouseMove += TagContainer_TagPreviewMouseMove; ;
+                realtimeMonitorView.TagContainer.TagClick += TagContainer_TagClick; ;
+                realtimeMonitorView.TagContainer.TagLocationChanged += TagContainer_TagLocationChanged; ;
+            }
+
             VideoPlayModel playModel = new VideoPlayModel();
 
             playModel.Ip = "192.168.28.136";
@@ -57,6 +70,55 @@ namespace SMS.Client
 
             realtimeMonitorView.Player.PlayHelper = new VideoPlayHelper();
             realtimeMonitorView.Player?.StartPlay(playModel);
+        }
+
+        private void TagContainer_TagLocationChanged(TagBase arg1, ITagModel arg2)
+        {
+        }
+
+        private void TagContainer_TagClick(TagBase arg1, RoutedEventArgs arg2)
+        {
+            RealtimePlayWindow realPlayWindow = new RealtimePlayWindow(400, 300);
+            realPlayWindow.Loaded += (s, e) =>
+            {
+                VideoPlayModel playModel = new VideoPlayModel();
+
+                playModel.Ip = "192.168.28.136";
+                playModel.Port = 8000;
+                playModel.Channel = 1;
+                playModel.UserName = "admin";
+                playModel.Password = "admin12345";
+                playModel.StreamType = 0;
+
+                realPlayWindow.RealPlayer.PlayHelper = new VideoPlayHelper();
+
+                Task.Factory.StartNew(() =>
+                {
+                    Thread.Sleep(1000);
+                    Dispatcher.Invoke(() =>
+                    {
+                        realPlayWindow.RealPlayer.StartPlay(playModel);
+                    });
+                });
+            };
+
+            realPlayWindow.Show();
+        }
+
+        private void TagContainer_TagPreviewMouseMove(TagBase arg1, MouseEventArgs arg2)
+        {
+        }
+
+        private void TagContainer_TagPreviewMouseLeftButtonUp(TagBase arg1, MouseButtonEventArgs arg2)
+        {
+        }
+
+        private void TagContainer_TagPreviewMouseLeftButtonDown(TagBase arg1, MouseButtonEventArgs arg2)
+        {
+        }
+
+        private void TagContainer_TagPreviewMouseRightButtonUp(TagBase arg1, MouseButtonEventArgs arg2)
+        {
         }
     }
 }

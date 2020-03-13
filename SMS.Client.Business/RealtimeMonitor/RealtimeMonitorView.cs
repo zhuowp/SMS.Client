@@ -49,7 +49,6 @@ namespace SMS.Client.Business
 
         private PtzController _ptzController = null;
         private WindowPanel _winPanel = null;
-        private TagContainer _tagContainer = null;
         private Grid _gridTitle = null;
         private Button _btnClose = null;
 
@@ -61,6 +60,7 @@ namespace SMS.Client.Business
 
         public RealtimePlayer Player { get; private set; }
         public Window ContainerWindow { get; private set; }
+        public TagContainer TagContainer { get; private set; }
 
         #endregion
 
@@ -125,7 +125,7 @@ namespace SMS.Client.Business
                 ContainerWindow = _winPanel.ContainerWindow;
             }
 
-            _tagContainer = GetTemplateChild("PART_TagContainer") as TagContainer;
+            TagContainer = GetTemplateChild("PART_TagContainer") as TagContainer;
 
             _gridTitle = GetTemplateChild("PART_Title") as Grid;
             if (_gridTitle != null)
@@ -142,7 +142,7 @@ namespace SMS.Client.Business
 
         public void Dispose()
         {
-            _tagContainer?.Dispose();
+            TagContainer?.Dispose();
         }
 
         #endregion

@@ -61,7 +61,7 @@
                                         BorderBrush="{TemplateBinding TextTagBorderBrush}"/>
 
                                 <TextBlock x:Name="PART_Title" Text="{TemplateBinding TagName}" Grid.ColumnSpan="3"
-                                           VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20,0,0,0" 
+                                           VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20,0,0,0" TextTrimming="CharacterEllipsis"
                                            Foreground="White" FontSize="16" FontFamily="Microsoft Yahei" ToolTip="{TemplateBinding TagName}"/>
 
                                 <CheckBox x:Name="PART_CheckBoxLeft" Grid.Column="0" Visibility="Collapsed" Panel.ZIndex="99"
