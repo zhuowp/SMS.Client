@@ -16,11 +16,6 @@ namespace SMS.Client.Controls
         //承载Winform控件的wpf容器
         private WindowsFormsHost _playScreenWindowsFormsHost = null;
 
-        //播放控件句柄
-        private IntPtr _screenHandle = IntPtr.Zero;
-        //播放句柄
-        private long _playHandle = -1;
-
         #endregion
 
         #region Properties
@@ -30,16 +25,9 @@ namespace SMS.Client.Controls
             set { _playScreenWindowsFormsHost = value; }
         }
 
-        public IntPtr ScreenHandle
-        {
-            get { return _screenHandle; }
-        }
+        public IntPtr ScreenHandle { get; private set; } = IntPtr.Zero;
 
-        public long PlayHandle
-        {
-            get { return _playHandle; }
-            protected set { _playHandle = value; }
-        }
+        public long PlayHandle { get; protected set; } = -1;
 
         public PlayStatus PlayStatus { get; protected set; }
 
@@ -66,14 +54,14 @@ namespace SMS.Client.Controls
             _playScreen.Click += new EventHandler(OnScreenClicked);
             _playScreen.BackColor = System.Drawing.Color.Black;
             _playScreenWindowsFormsHost.Child = _playScreen;
-            _screenHandle = _playScreen.Handle;
+            ScreenHandle = _playScreen.Handle;
         }
 
         protected void DisposePlayScreen()
         {
             _playScreen = null;
             _playScreenWindowsFormsHost.Child = null;
-            _screenHandle = IntPtr.Zero;
+            ScreenHandle = IntPtr.Zero;
         }
 
         #endregion

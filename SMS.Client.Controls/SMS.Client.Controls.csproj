@@ -11,28 +11,28 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="Themes\EagleEye.xaml">
+    <Page Update="Themes\Maps\EagleEye.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Themes\HeatMap.xaml">
+    <Page Update="Themes\HeatMaps\HeatMap.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Themes\PlaneMap.xaml">
+    <Page Update="Themes\Maps\PlaneMap.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Themes\ImageButton.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Themes\AreaTag.xaml">
+    <Page Update="Themes\Tags\AreaTag.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Themes\LineTextTag.xaml">
+    <Page Update="Themes\Tags\LineTextTag.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Themes\Panorama.xaml">
+    <Page Update="Themes\Maps\Panorama.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Themes\IconTag.xaml">
+    <Page Update="Themes\Tags\IconTag.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Themes\ImageRadioButton.xaml">

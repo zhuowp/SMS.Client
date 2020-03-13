@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -100,12 +102,26 @@ namespace SMS.Client.Controls
         {
             VectorTag vectorTag = d as VectorTag;
             vectorTag.UpdateTagLocationInScreen();
+            if (e.OldValue is ObservableCollection<Point> oldCollection)
+            {
+                oldCollection.CollectionChanged -= vectorTag.AreaPointCollection_CollectionChanged;
+            }
+
+            if (e.NewValue is ObservableCollection<Point> newCollection)
+            {
+                newCollection.CollectionChanged += vectorTag.AreaPointCollection_CollectionChanged;
+            }
         }
 
         private static void OnArrowBrushChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             VectorTag vectorTag = d as VectorTag;
             vectorTag.UpdateArrowShapeBrush();
+        }
+
+        private void AreaPointCollection_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            UpdateTagLocationInScreen();
         }
 
         private void UpdateArrowShapeBrush()

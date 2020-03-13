@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -99,6 +101,20 @@ namespace SMS.Client.Controls
         {
             AreaTag areaTag = d as AreaTag;
             areaTag.UpdateTagLocationInScreen();
+            if (e.OldValue is ObservableCollection<Point> oldCollection)
+            {
+                oldCollection.CollectionChanged -= areaTag.AreaPointCollection_CollectionChanged;
+            }
+
+            if (e.NewValue is ObservableCollection<Point> newCollection)
+            {
+                newCollection.CollectionChanged += areaTag.AreaPointCollection_CollectionChanged;
+            }
+        }
+
+        private void AreaPointCollection_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            UpdateTagLocationInScreen();
         }
 
         private void UpdateAreaShape()

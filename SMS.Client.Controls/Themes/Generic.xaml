@@ -3,28 +3,28 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:SMS.Client.Controls">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/CircularPanel.xaml"/>
-        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/WindowPanel.xaml"/>
+        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/Panels/CircularPanel.xaml"/>
+        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/Panels/WindowPanel.xaml"/>
 
-        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/PtzController.xaml"/>
-        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/RealtimePlayer.xaml"/>
-        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/Replayer.xaml"/>
+        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/Players/PtzController.xaml"/>
+        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/Players/RealtimePlayer.xaml"/>
+        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/Players/Replayer.xaml"/>
 
-        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/TagContainer.xaml"/>
-        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/IconTag.xaml"/>
-        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/LineTextTag.xaml"/>
-        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/AreaTag.xaml"/>
-        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/VectorTag.xaml"/>
+        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/Tags/TagContainer.xaml"/>
+        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/Tags/IconTag.xaml"/>
+        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/Tags/LineTextTag.xaml"/>
+        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/Tags/AreaTag.xaml"/>
+        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/Tags/VectorTag.xaml"/>
 
         <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/ImageButton.xaml"/>
         <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/ImageRadioButton.xaml"/>
 
-        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/Tellurion.xaml"/>
-        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/Panorama.xaml"/>
-        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/PlaneMap.xaml"/>
-        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/EagleEye.xaml"/>
+        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/Maps/Tellurion.xaml"/>
+        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/Maps/Panorama.xaml"/>
+        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/Maps/PlaneMap.xaml"/>
+        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/Maps/EagleEye.xaml"/>
 
-        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/HeatMap.xaml"/>
-        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/HeatMapLegend.xaml"/>
+        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/HeatMaps/HeatMap.xaml"/>
+        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/HeatMaps/HeatMapLegend.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

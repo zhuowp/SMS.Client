@@ -8,6 +8,7 @@
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
+                        <WindowsFormsHost x:Name="PART_WinFormsHost"/>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
