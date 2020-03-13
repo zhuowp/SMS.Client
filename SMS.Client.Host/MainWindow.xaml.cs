@@ -79,6 +79,7 @@ namespace SMS.Client
         private void TagContainer_TagClick(TagBase arg1, RoutedEventArgs arg2)
         {
             RealtimePlayWindow realPlayWindow = new RealtimePlayWindow(400, 300);
+
             realPlayWindow.Loaded += (s, e) =>
             {
                 VideoPlayModel playModel = new VideoPlayModel();
@@ -91,7 +92,6 @@ namespace SMS.Client
                 playModel.StreamType = 0;
 
                 realPlayWindow.RealPlayer.PlayHelper = new VideoPlayHelper();
-
                 Task.Factory.StartNew(() =>
                 {
                     Thread.Sleep(1000);

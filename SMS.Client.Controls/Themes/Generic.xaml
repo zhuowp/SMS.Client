@@ -19,6 +19,7 @@
         <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/Tags/AreaTag.xaml"/>
         <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/Tags/VectorTag.xaml"/>
 
+        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/ComboTree.xaml"/>
         <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/ImageButton.xaml"/>
         <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/ImageRadioButton.xaml"/>
 
