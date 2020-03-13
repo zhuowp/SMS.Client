@@ -8,6 +8,9 @@
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid>
+                            <Image x:Name="PART_HeatMapImage"/>
+                        </Grid>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
