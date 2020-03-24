@@ -4,6 +4,17 @@
                     xmlns:ctrl="clr-namespace:SMS.Client.Controls;assembly=SMS.Client.Controls">
 
     <Style TargetType="{x:Type local:RealtimePlayWindow}">
+        <Setter Property="WindowStyle" Value="None"/>
+        <Setter Property="ResizeMode" Value="NoResize"/>
+        <Setter Property="WindowChrome.WindowChrome">
+            <Setter.Value>
+                <WindowChrome CornerRadius="0"
+                      GlassFrameThickness="-1"
+                      UseAeroCaptionButtons="False"
+                      NonClientFrameEdges="None" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Background" Value="{x:Null}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:RealtimePlayWindow}">
@@ -19,9 +30,9 @@
                                 <TextBlock Text="{TemplateBinding Title}"/>
                             </Grid>
 
-                            <ctrl:WindowPanel IsTransparent="False" Grid.Row="1">
+                            <Grid Grid.Row="1" Background="Black">
                                 <ctrl:RealtimePlayer x:Name="PART_Player"/>
-                            </ctrl:WindowPanel>
+                            </Grid>
                         </Grid>
                     </Border>
                 </ControlTemplate>

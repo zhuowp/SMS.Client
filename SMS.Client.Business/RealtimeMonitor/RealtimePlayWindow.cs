@@ -66,9 +66,9 @@ namespace SMS.Client.Business
 
         public RealtimePlayWindow()
         {
-            AllowsTransparency = true;
-            WindowStyle = WindowStyle.None;
-            Background = null;
+            //AllowsTransparency = true;
+            //WindowStyle = WindowStyle.None;
+            //Background = null;
         }
 
         public RealtimePlayWindow(double width, double height) : this()
