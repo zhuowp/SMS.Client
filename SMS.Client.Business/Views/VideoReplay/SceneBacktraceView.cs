@@ -11,7 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SMS.Client.Business.VideoReplay
+namespace SMS.Client.Business
 {
     /// <summary>
     /// 按照步骤 1a 或 1b 操作，然后执行步骤 2 以在 XAML 文件中使用此自定义控件。
@@ -44,9 +44,33 @@ namespace SMS.Client.Business.VideoReplay
     /// </summary>
     public class SceneBacktraceView : Control
     {
+        #region Fields
+
+        #endregion
+
+        #region Properties
+
+        #endregion
+
+        #region Constructors
+
         static SceneBacktraceView()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(SceneBacktraceView), new FrameworkPropertyMetadata(typeof(SceneBacktraceView)));
         }
+
+        #endregion
+
+        #region Private Methods
+
+        #endregion
+
+        #region Protected Methods
+
+        #endregion
+
+        #region Public Methods
+
+        #endregion
     }
 }

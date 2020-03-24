@@ -29,11 +29,11 @@ namespace SMS.Client
         public MainWindow()
         {
             InitializeComponent();
-            realtimeMonitorView.DataContext = new RealtimeMonitorViewModel();
+            //realtimeMonitorView.DataContext = new RealtimeMonitorViewModel();
 
-            realtimeMonitorView.CloseWindow += RealtimeMonitorView_CloseWindow;
-            Loaded += MainWindow_Loaded;
-            Closed += MainWindow_Closed;
+            //realtimeMonitorView.CloseWindow += RealtimeMonitorView_CloseWindow;
+            //Loaded += MainWindow_Loaded;
+            //Closed += MainWindow_Closed;
         }
 
         private void RealtimeMonitorView_CloseWindow()

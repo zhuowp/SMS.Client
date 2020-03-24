@@ -31,4 +31,5 @@
         <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/HeatMaps/HeatMap.xaml"/>
         <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/HeatMaps/HeatMapLegend.xaml"/>
     </ResourceDictionary.MergedDictionaries>
+
 </ResourceDictionary>

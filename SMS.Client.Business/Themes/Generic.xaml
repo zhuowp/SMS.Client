@@ -5,7 +5,8 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/SMS.Client.Business;component/Themes/RealtimeMonitorView.xaml"/>
         <ResourceDictionary Source="/SMS.Client.Business;component/Themes/RealtimePlayWindow.xaml"/>
-        
+
+        <ResourceDictionary Source="/SMS.Client.Business;component/Themes/VideoReplayControlPanel.xaml"/>
         <ResourceDictionary Source="/SMS.Client.Business;component/Themes/SceneBacktraceView.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
