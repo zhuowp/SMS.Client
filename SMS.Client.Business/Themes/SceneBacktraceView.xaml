@@ -9,12 +9,12 @@
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
-                        <Grid Background="Gray">
+                        <Grid Background="White">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition Height="120"/>
                             </Grid.RowDefinitions>
-                            <ctrl:Replayer x:Name="PART_Replayer" Grid.Row="0"/>
+                            <ctrl:Replayer x:Name="PART_Replayer" Grid.Row="0" Background="Black"/>
                             <local:VideoReplayControlPanel x:Name="PART_VideoReplayControlPanel" Grid.Row="1"/>
                         </Grid>
                     </Border>

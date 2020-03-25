@@ -9,5 +9,4 @@
         <ResourceDictionary Source="/SMS.Client.Business;component/Themes/VideoReplayControlPanel.xaml"/>
         <ResourceDictionary Source="/SMS.Client.Business;component/Themes/SceneBacktraceView.xaml"/>
     </ResourceDictionary.MergedDictionaries>
-
 </ResourceDictionary>

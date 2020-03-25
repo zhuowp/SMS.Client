@@ -18,6 +18,16 @@
     <None Remove="Images\DeviceIcons\panoramic_camera_blue.png" />
     <None Remove="Images\DeviceIcons\panoramic_camera_dark.png" />
     <None Remove="Images\DeviceIcons\panoramic_camera_gray.png" />
+    <None Remove="Images\Plays\fastforward_1.png" />
+    <None Remove="Images\Plays\fastforward_2.png" />
+    <None Remove="Images\Plays\pause_1.png" />
+    <None Remove="Images\Plays\pause_2.png" />
+    <None Remove="Images\Plays\play_1.png" />
+    <None Remove="Images\Plays\play_2.png" />
+    <None Remove="Images\Plays\slowforward_1.png" />
+    <None Remove="Images\Plays\slowforward_2.png" />
+    <None Remove="Images\Plays\stop_1.png" />
+    <None Remove="Images\Plays\stop_2.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,6 +43,22 @@
     <Resource Include="Images\DeviceIcons\panoramic_camera_blue.png" />
     <Resource Include="Images\DeviceIcons\panoramic_camera_dark.png" />
     <Resource Include="Images\DeviceIcons\panoramic_camera_gray.png" />
+    <Resource Include="Images\Plays\fastforward_1.png" />
+    <Resource Include="Images\Plays\fastforward_2.png" />
+    <Resource Include="Images\Plays\pause_1.png" />
+    <Resource Include="Images\Plays\pause_2.png" />
+    <Resource Include="Images\Plays\play_1.png" />
+    <Resource Include="Images\Plays\play_2.png" />
+    <Resource Include="Images\Plays\slowforward_1.png" />
+    <Resource Include="Images\Plays\slowforward_2.png" />
+    <Resource Include="Images\Plays\stop_1.png" />
+    <Resource Include="Images\Plays\stop_2.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Themes\PlayIcons.xaml">
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
 
 </Project>

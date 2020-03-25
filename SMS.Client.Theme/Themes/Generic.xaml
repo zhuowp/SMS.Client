@@ -6,5 +6,6 @@
         <ResourceDictionary Source="/SMS.Client.Theme;component/Themes/Colors.xaml"/>
         <ResourceDictionary Source="/SMS.Client.Theme;component/Themes/SolidColorBrushes.xaml"/>
         <ResourceDictionary Source="/SMS.Client.Theme;component/Themes/DeviceIcons.xaml"/>
+        <ResourceDictionary Source="/SMS.Client.Theme;component/Themes/PlayIcons.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

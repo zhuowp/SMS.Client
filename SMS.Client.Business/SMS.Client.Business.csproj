@@ -11,8 +11,4 @@
     <ProjectReference Include="..\SMS.Client.Controls\SMS.Client.Controls.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Images\" />
-  </ItemGroup>
-
 </Project>
