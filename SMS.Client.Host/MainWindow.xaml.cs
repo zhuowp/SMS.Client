@@ -39,11 +39,11 @@ namespace SMS.Client
         {
             VideoPlayModel playModel = new VideoPlayModel();
 
-            playModel.Ip = "192.168.28.136";
+            playModel.Ip = "192.168.28.130";
             playModel.Port = 8000;
             playModel.Channel = 1;
             playModel.UserName = "admin";
-            playModel.Password = "admin12345";
+            playModel.Password = "admin888";
             playModel.StreamType = 0;
 
             realtimeMonitorView.Player.PlayHelper = new VideoPlayHelper();

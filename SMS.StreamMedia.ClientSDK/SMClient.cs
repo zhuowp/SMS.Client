@@ -118,6 +118,12 @@ namespace SMS.StreamMedia.ClientSDK
                 LogHelper.Debug(string.Format("设备{0}-{1}设置报警回调失败，错误代码[{2}]", devIp, devPort, lastErr));
             }
 
+            CHCNetSDK.NET_DVR_SETUPALARM_PARAM setAlarmParam = new CHCNetSDK.NET_DVR_SETUPALARM_PARAM();
+            setAlarmParam.byAlarmInfoType = 1;
+            setAlarmParam.byLevel = 1;
+            //布防
+            long setAlarmHandle = CHCNetSDK.NET_DVR_SetupAlarmChan(loginId);
+
             DevLoginModel devLoginModel = new DevLoginModel();
             devLoginModel.LoginId = loginId;
             devLoginModel.SubscriberCount = 1;
@@ -136,6 +142,22 @@ namespace SMS.StreamMedia.ClientSDK
 
         public void AlarmMessageHandle(int lCommand, ref CHCNetSDK.NET_DVR_ALARMER pAlarmer, IntPtr pAlarmInfo, uint dwBufLen, IntPtr pUser)
         {
+            switch (lCommand)
+            {
+                //NET_DEV_GIS_INFO gis_info;
+                //videoDevInfo devInfo;
+                //devInfo.devId = (char*)pAlarmer->sSerialNumber;
+                //memcpy(&gis_info, pAlarmInfo, sizeof(NET_DEV_GIS_INFO));
+
+                case CHCNetSDK.COMM_GISINFO_UPLOAD:
+                    byte[] deId = pAlarmer.sSerialNumber;
+                    CHCNetSDK.NET_DVR_GIS_INFO gis_info_tmp = new CHCNetSDK.NET_DVR_GIS_INFO();
+                    int nSize = Marshal.SizeOf(gis_info_tmp); 
+                    IntPtr ptrGisInfo = Marshal.AllocHGlobal(nSize); 
+                    Marshal.StructureToPtr(gis_info_tmp, ptrGisInfo, false);
+                    gis_info_tmp = (CHCNetSDK.NET_DVR_GIS_INFO)Marshal.PtrToStructure(pAlarmInfo, typeof(CHCNetSDK.NET_DVR_GIS_INFO));
+                    break;
+            }
             OnUploadAlarm.Invoke(lCommand, pAlarmer, pAlarmInfo, dwBufLen, pUser);
         }
 

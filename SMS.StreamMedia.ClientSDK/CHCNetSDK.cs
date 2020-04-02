@@ -922,7 +922,7 @@ namespace SMS.StreamMedia.ClientSDK
         public const int COMM_ALARM_CVR = 0x4005;  //CVR 2.0.X外部报警类型
         public const int COMM_ALARM_HOT_SPARE = 0x4006;  //热备异常报警（N+1模式异常报警）
         public const int COMM_ALARM_V40 = 0x4007;	//移动侦测，视频丢失，遮挡，IO信号量等报警信息主动上传，报警数据为可变长
-
+        public const int COMM_GISINFO_UPLOAD = 0x4012;//GIS信息上传
         public const int COMM_ITS_ROAD_EXCEPTION = 0x4500;	 //路口设备异常报警
         public const int COMM_ITS_EXTERNAL_CONTROL_ALARM = 0x4520;  //外控报警
         public const int COMM_SCREEN_ALARM = 0x5000;  //多屏控制器报警类型
