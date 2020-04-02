@@ -11,11 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SMS.Client.Controls", "SMS.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SMS.Client.Theme", "SMS.Client.Theme\SMS.Client.Theme.csproj", "{B53072DF-A8D0-4D54-8183-8344D07403A8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SMS.Client.BusinessComponent", "SMS.Client.BusinessComponent\SMS.Client.BusinessComponent.csproj", "{C48D943D-E651-4896-ACCC-98BEE51BD17A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SMS.Client.Business", "SMS.Client.Business\SMS.Client.Business.csproj", "{C48D943D-E651-4896-ACCC-98BEE51BD17A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SMS.Client.UnitTest", "SMS.Client.UnitTest\SMS.Client.UnitTest.csproj", "{5EC65C24-92B1-4943-A915-1E30FFB43FCD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMS.StreamMedia.ClientSDK", "SMS.StreamMedia.ClientSDK\SMS.StreamMedia.ClientSDK.csproj", "{06559D78-9F65-4459-AF64-E12195E02655}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SMS.StreamMedia.ClientSDK", "SMS.StreamMedia.ClientSDK\SMS.StreamMedia.ClientSDK.csproj", "{06559D78-9F65-4459-AF64-E12195E02655}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

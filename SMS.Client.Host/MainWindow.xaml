@@ -4,10 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SMS.Client"
-        xmlns:bn="clr-namespace:SMS.Client.BusinessComponent;assembly=SMS.Client.BusinessComponent"
-        mc:Ignorable="d"
+        xmlns:bn="clr-namespace:SMS.Client.Business;assembly=SMS.Client.Business"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <bn:RealtimeMonitorView x:Name="realtimeMonitorView"/>
+        <bn:RealtimeMonitorView x:Name="realtimeMonitorView" Visibility="Collapsed"/>
+        <bn:SceneBacktraceView x:Name="sceneBacktraceView"/>
     </Grid>
 </Window>

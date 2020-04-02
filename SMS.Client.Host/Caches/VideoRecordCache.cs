@@ -58,7 +58,6 @@ namespace SMS.Client.Host.Caches
         public static string GetRecordFileListKey(string channelId, DateTime date)
         {
             string recordFileListKey = string.Format("{0}-{1}", channelId, date.ToString("yyyy-MM-dd"));
-
             return recordFileListKey;
         }
 

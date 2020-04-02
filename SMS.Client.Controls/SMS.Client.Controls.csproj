@@ -6,4 +6,38 @@
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SMS.Client.Log\SMS.Client.Log.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Themes\Maps\EagleEye.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\HeatMaps\HeatMap.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Maps\PlaneMap.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\ImageButton.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Tags\AreaTag.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Tags\LineTextTag.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Maps\Panorama.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Tags\IconTag.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\ImageRadioButton.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
 </Project>

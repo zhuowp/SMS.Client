@@ -1,0 +1,6 @@
+{
+  "ThemeName": "默认主题",
+  "AssemblyName": "SMS.Client.Theme",
+  "EntrancePath": "Themes/Generic.xaml",
+  "ThemeIconPath": ""
+}

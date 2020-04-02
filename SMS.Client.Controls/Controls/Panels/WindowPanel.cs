@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -42,6 +43,7 @@ namespace SMS.Client.Controls
     ///     <MyNamespace:WindowPanel/>
     ///
     /// </summary>
+    [ContentProperty("Child")]
     public class WindowPanel : ContentControl
     {
         #region Fields
@@ -67,6 +69,12 @@ namespace SMS.Client.Controls
         public static readonly DependencyProperty IsTopmostProperty =
             DependencyProperty.Register("IsTopmost", typeof(bool), typeof(WindowPanel), new PropertyMetadata(false, OnIsTopmostChanged));
 
+        public static readonly DependencyProperty ChildProperty =
+            DependencyProperty.Register("Child", typeof(FrameworkElement), typeof(WindowPanel), new PropertyMetadata(null, OnChildChanged));
+
+        public static readonly DependencyProperty IsTransparentProperty =
+            DependencyProperty.Register("IsTransparent", typeof(bool), typeof(WindowPanel), new PropertyMetadata(true, OnIsTransparentChanged));
+
         #endregion
 
         #region Dependency Property Wrappers
@@ -77,6 +85,18 @@ namespace SMS.Client.Controls
             set { SetValue(IsTopmostProperty, value); }
         }
 
+        public FrameworkElement Child
+        {
+            get { return (FrameworkElement)GetValue(ChildProperty); }
+            set { SetValue(ChildProperty, value); }
+        }
+
+        public bool IsTransparent
+        {
+            get { return (bool)GetValue(IsTransparentProperty); }
+            set { SetValue(IsTransparentProperty, value); }
+        }
+
         #endregion
 
         #region Constructors
@@ -84,7 +104,13 @@ namespace SMS.Client.Controls
         static WindowPanel()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(WindowPanel), new FrameworkPropertyMetadata(typeof(WindowPanel)));
-            ContentProperty.OverrideMetadata(typeof(WindowPanel), new PropertyMetadata(null, OnContentChanged));
+        }
+
+        public WindowPanel()
+        {
+            InitContainerWindow(IsTransparent);
+
+            DataContextChanged += WindowPanel_DataContextChanged;
         }
 
         #endregion
@@ -100,13 +126,49 @@ namespace SMS.Client.Controls
             }
         }
 
-        private static void OnContentChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnChildChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             WindowPanel windowPanel = d as WindowPanel;
             if (windowPanel._containerWindow != null)
             {
                 windowPanel._containerWindow.Content = e.NewValue;
             }
+        }
+
+        private static void OnIsTransparentChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            WindowPanel windowPanel = d as WindowPanel;
+            if(e.NewValue != e.OldValue)
+            {
+                windowPanel.InitContainerWindow((bool)e.NewValue);
+            }
+        }
+
+        private void WindowPanel_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (_containerWindow != null)
+            {
+                _containerWindow.DataContext = DataContext;
+            }
+        }
+
+        private void InitContainerWindow(bool isAllowsTransparency)
+        {
+            if(_containerWindow != null)
+            {
+                _containerWindow.Content = null;
+                _containerWindow.Close();
+            }
+
+            _containerWindow = new ContainerWindow(this, isAllowsTransparency)
+            {
+                Topmost = IsTopmost,
+                Visibility = Visibility,
+                Content = Child,
+                DataContext = DataContext,
+            };
+
+            Panel.SetZIndex(_containerWindow, Panel.GetZIndex(this));
         }
 
         #endregion

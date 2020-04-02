@@ -7,7 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SMS.Client.BusinessComponent\SMS.Client.BusinessComponent.csproj" />
+    <PackageReference Include="MvvmLight" Version="5.4.1.1" />
+    <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SMS.Client.Business\SMS.Client.Business.csproj" />
     <ProjectReference Include="..\SMS.Client.Controls\SMS.Client.Controls.csproj" />
     <ProjectReference Include="..\SMS.Client.Log\SMS.Client.Log.csproj" />
     <ProjectReference Include="..\SMS.Client.Theme\SMS.Client.Theme.csproj" />
@@ -15,7 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModels\" />
+    <None Update="Configs\Theme.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
