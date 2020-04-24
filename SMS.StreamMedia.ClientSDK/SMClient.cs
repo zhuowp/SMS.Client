@@ -22,7 +22,11 @@ namespace SMS.StreamMedia.ClientSDK
         private CHCNetSDK.REALDATACALLBACK _HCRealDataCallback = null;
         private CHCNetSDK.MSGCallBack_V31 _msgCallback_V31 = null;
 
-        private event Action<int, CHCNetSDK.NET_DVR_ALARMER, IntPtr, uint, IntPtr> OnUploadAlarm;
+        #endregion
+
+        #region Events
+
+        public event Action<CHCNetSDK.NET_DVR_GIS_UPLOADINFO> OnGisInfoChanged;
 
         #endregion
 
@@ -125,6 +129,7 @@ namespace SMS.StreamMedia.ClientSDK
             long setAlarmHandle = CHCNetSDK.NET_DVR_SetupAlarmChan(loginId);
 
             DevLoginModel devLoginModel = new DevLoginModel();
+            devLoginModel.Key = loginUserKey;
             devLoginModel.LoginId = loginId;
             devLoginModel.SubscriberCount = 1;
 
@@ -144,21 +149,11 @@ namespace SMS.StreamMedia.ClientSDK
         {
             switch (lCommand)
             {
-                //NET_DEV_GIS_INFO gis_info;
-                //videoDevInfo devInfo;
-                //devInfo.devId = (char*)pAlarmer->sSerialNumber;
-                //memcpy(&gis_info, pAlarmInfo, sizeof(NET_DEV_GIS_INFO));
-
                 case CHCNetSDK.COMM_GISINFO_UPLOAD:
-                    byte[] deId = pAlarmer.sSerialNumber;
-                    CHCNetSDK.NET_DVR_GIS_INFO gis_info_tmp = new CHCNetSDK.NET_DVR_GIS_INFO();
-                    int nSize = Marshal.SizeOf(gis_info_tmp); 
-                    IntPtr ptrGisInfo = Marshal.AllocHGlobal(nSize); 
-                    Marshal.StructureToPtr(gis_info_tmp, ptrGisInfo, false);
-                    gis_info_tmp = (CHCNetSDK.NET_DVR_GIS_INFO)Marshal.PtrToStructure(pAlarmInfo, typeof(CHCNetSDK.NET_DVR_GIS_INFO));
+                    var gisInfo = (CHCNetSDK.NET_DVR_GIS_UPLOADINFO)Marshal.PtrToStructure(pAlarmInfo, typeof(CHCNetSDK.NET_DVR_GIS_UPLOADINFO));
+                    OnGisInfoChanged?.Invoke(gisInfo);
                     break;
             }
-            OnUploadAlarm.Invoke(lCommand, pAlarmer, pAlarmInfo, dwBufLen, pUser);
         }
 
         /// <summary>

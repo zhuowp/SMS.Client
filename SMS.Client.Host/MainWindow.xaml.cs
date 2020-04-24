@@ -3,6 +3,7 @@ using SMS.Client.Controls;
 using SMS.Client.Host.Helpers;
 using SMS.Client.Host.Models;
 using SMS.Client.Host.ViewModels;
+using SMS.StreamMedia.ClientSDK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,11 +30,11 @@ namespace SMS.Client
         public MainWindow()
         {
             InitializeComponent();
-            //realtimeMonitorView.DataContext = new RealtimeMonitorViewModel();
+            realtimeMonitorView.DataContext = new RealtimeMonitorViewModel();
 
-            //realtimeMonitorView.CloseWindow += RealtimeMonitorView_CloseWindow;
-            //Loaded += MainWindow_Loaded;
-            //Closed += MainWindow_Closed;
+            realtimeMonitorView.CloseWindow += RealtimeMonitorView_CloseWindow;
+            Loaded += MainWindow_Loaded;
+            Closed += MainWindow_Closed;
         }
 
         private void RealtimeMonitorView_CloseWindow()
@@ -51,25 +52,30 @@ namespace SMS.Client
         {
             if (realtimeMonitorView.TagContainer != null)
             {
-                realtimeMonitorView.TagContainer.TagPreviewMouseRightButtonUp += TagContainer_TagPreviewMouseRightButtonUp; ;
-                realtimeMonitorView.TagContainer.TagPreviewMouseLeftButtonDown += TagContainer_TagPreviewMouseLeftButtonDown; ;
-                realtimeMonitorView.TagContainer.TagPreviewMouseLeftButtonUp += TagContainer_TagPreviewMouseLeftButtonUp; ;
-                realtimeMonitorView.TagContainer.TagPreviewMouseMove += TagContainer_TagPreviewMouseMove; ;
-                realtimeMonitorView.TagContainer.TagClick += TagContainer_TagClick; ;
-                realtimeMonitorView.TagContainer.TagLocationChanged += TagContainer_TagLocationChanged; ;
+                realtimeMonitorView.TagContainer.TagPreviewMouseRightButtonUp += TagContainer_TagPreviewMouseRightButtonUp;
+                realtimeMonitorView.TagContainer.TagPreviewMouseLeftButtonDown += TagContainer_TagPreviewMouseLeftButtonDown;
+                realtimeMonitorView.TagContainer.TagPreviewMouseLeftButtonUp += TagContainer_TagPreviewMouseLeftButtonUp;
+                realtimeMonitorView.TagContainer.TagPreviewMouseMove += TagContainer_TagPreviewMouseMove;
+                realtimeMonitorView.TagContainer.TagClick += TagContainer_TagClick;
+                realtimeMonitorView.TagContainer.TagLocationChanged += TagContainer_TagLocationChanged;
             }
 
+            SMClient.Instance.OnGisInfoChanged += Instance_OnGisInfoChanged;
             VideoPlayModel playModel = new VideoPlayModel();
 
-            playModel.Ip = "192.168.28.130";
+            playModel.Ip = "192.168.28.136";
             playModel.Port = 8000;
             playModel.Channel = 1;
             playModel.UserName = "admin";
-            playModel.Password = "admin888";
+            playModel.Password = "admin12345";
             playModel.StreamType = 0;
 
             realtimeMonitorView.Player.PlayHelper = new VideoPlayHelper();
             realtimeMonitorView.Player?.StartPlay(playModel);
+        }
+
+        private void Instance_OnGisInfoChanged(CHCNetSDK.NET_DVR_GIS_UPLOADINFO arg)
+        {
         }
 
         private void TagContainer_TagLocationChanged(TagBase arg1, ITagModel arg2)
