@@ -1,0 +1,32 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace SMS.Client.Utilities
+{
+    public static class AngleConverter
+    {
+        private const double RADIAN_TO_DEGREE_COEFFICIENT = 57.295779513082323;
+        private const double DEGREE_TO_RADIAN_COEFFICIENT = 0.017453292519943295;
+
+        public static double ToDegree(this float radian)
+        {
+            return radian * RADIAN_TO_DEGREE_COEFFICIENT;
+        }
+
+        public static double ToDegree(this double radian)
+        {
+            return radian * RADIAN_TO_DEGREE_COEFFICIENT;
+        }
+
+        public static double ToRadian(this double degree)
+        {
+            return degree * DEGREE_TO_RADIAN_COEFFICIENT;
+        }
+
+        public static double ToRadian(this float degree)
+        {
+            return degree * DEGREE_TO_RADIAN_COEFFICIENT;
+        }
+    }
+}

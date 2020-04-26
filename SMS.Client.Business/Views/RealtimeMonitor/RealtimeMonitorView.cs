@@ -52,6 +52,10 @@ namespace SMS.Client.Business
         private Grid _gridTitle = null;
         private Button _btnClose = null;
 
+        #endregion
+
+        #region Events
+
         public event Action CloseWindow;
 
         #endregion
