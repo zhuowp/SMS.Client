@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SMS.Client.Utilities
+namespace SMS.Client.Common.Utilities
 {
     public static class AngleConverter
     {

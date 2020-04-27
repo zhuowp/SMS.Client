@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SMS.Client.Controls\SMS.Client.Controls.csproj" />
-    <ProjectReference Include="..\SMS.Client.Utilities\SMS.Client.Utilities.csproj" />
   </ItemGroup>
 
 </Project>

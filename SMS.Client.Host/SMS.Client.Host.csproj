@@ -14,10 +14,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SMS.Client.Business\SMS.Client.Business.csproj" />
+    <ProjectReference Include="..\SMS.Client.Common\SMS.Client.Common.csproj" />
     <ProjectReference Include="..\SMS.Client.Controls\SMS.Client.Controls.csproj" />
     <ProjectReference Include="..\SMS.Client.Log\SMS.Client.Log.csproj" />
     <ProjectReference Include="..\SMS.Client.Theme\SMS.Client.Theme.csproj" />
-    <ProjectReference Include="..\SMS.Client.Utilities\SMS.Client.Utilities.csproj" />
     <ProjectReference Include="..\SMS.StreamMedia.ClientSDK\SMS.StreamMedia.ClientSDK.csproj" />
   </ItemGroup>
 

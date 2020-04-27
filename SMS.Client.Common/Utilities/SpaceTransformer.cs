@@ -1,8 +1,11 @@
-﻿using System;
+﻿using SMS.Client.Common.Models;
+using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Text;
 using System.Windows;
 
-namespace SMS.Client.Utilities
+namespace SMS.Client.Common.Utilities
 {
     public class SpaceTransformer
     {
@@ -104,12 +107,17 @@ namespace SMS.Client.Utilities
             return new Point(normalizedWidth * _width, normalizedHeight * _height);
         }
 
-        public Point ScreenLocationToAngleLocation(Point location, double horizontalFieldOfView, double verticalFieldOfView)
+        public Point AngleLocationToScreenLocation(PTZ ptz, PTZ cameraPtz, double horizontalFieldOfView, double verticalFieldOfView)
+        {
+            return AngleLocationToScreenLocation(ptz.Pan, ptz.Tilt, cameraPtz.Pan, cameraPtz.Tilt, horizontalFieldOfView, verticalFieldOfView);
+        }
+
+        public PTZ ScreenLocationToAngleLocation(Point location, double horizontalFieldOfView, double verticalFieldOfView)
         {
             double panAngle = NormalizedDisplacementToAngle(horizontalFieldOfView, location.X);
             double tiltAngle = NormalizedDisplacementToAngle(verticalFieldOfView, location.Y);
 
-            return new Point(panAngle, tiltAngle);
+            return new PTZ(panAngle, tiltAngle, 1);
         }
 
         #endregion

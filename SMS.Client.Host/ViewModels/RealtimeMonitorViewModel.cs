@@ -1,9 +1,8 @@
 ﻿using GalaSoft.MvvmLight;
+using SMS.Client.Common.Utilities;
 using SMS.Client.Controls;
 using SMS.Client.Host.Models.Tags;
-using SMS.Client.Utilities;
 using SMS.StreamMedia.ClientSDK;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -18,7 +17,7 @@ namespace SMS.Client.Host.ViewModels
         private string _title = "SMS Client";
         private ObservableCollection<ITagModel> _tagCollection = new ObservableCollection<ITagModel>();
 
-        private SpaceTransformer _spaceTransformer = new SpaceTransformer(450, 800);
+        private SpaceTransformer _spaceTransformer = new SpaceTransformer(800, 450);
 
         #endregion
 
@@ -58,7 +57,7 @@ namespace SMS.Client.Host.ViewModels
         public RealtimeMonitorViewModel()
         {
             points.Add(new Point(0, 0));
-            points.Add(new Point(33, 5));
+            points.Add(new Point(245, 28));
             //points.Add(new Point(90, 20));
             //points.Add(new Point(180, -30));
 
@@ -127,10 +126,8 @@ namespace SMS.Client.Host.ViewModels
             for (int i = 0; i < points.Count; i++)
             {
                 Point point = points[i];
-                double panAngle = _spaceTransformer.AbsoluteAngleToCameraAngle(point.X.ToRadian(), obj.struPtzPos.fPanPos.ToRadian());
-                double tiltAngle = _spaceTransformer.AbsoluteAngleToCameraAngle(point.Y.ToRadian(), obj.struPtzPos.fTiltPos.ToRadian());
 
-                Point tagPoint = _spaceTransformer.AngleLocationToScreenLocation(panAngle, tiltAngle, obj.fHorizontalValue.ToRadian(), obj.fVerticalValue.ToRadian());
+                Point tagPoint = _spaceTransformer.AngleLocationToScreenLocation(point.X, point.Y, obj.struPtzPos.fPanPos, obj.struPtzPos.fTiltPos, obj.fHorizontalValue, obj.fVerticalValue);
                 TagCollection[i].Location = tagPoint;
             }
         }
