@@ -7,9 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MvvmLight" Version="5.4.1.1" />
-    <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <Compile Remove="Helpers\Replays\**" />
+    <EmbeddedResource Remove="Helpers\Replays\**" />
+    <None Remove="Helpers\Replays\**" />
+    <Page Remove="Helpers\Replays\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Helpers\VideoPlayHelper.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,6 +30,10 @@
     <None Update="Configs\Theme.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
   </ItemGroup>
 
 </Project>

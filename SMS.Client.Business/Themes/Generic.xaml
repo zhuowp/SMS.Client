@@ -3,10 +3,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:SMS.Client.Business">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/SMS.Client.Business;component/Themes/RealtimeMonitorView.xaml"/>
-        <ResourceDictionary Source="/SMS.Client.Business;component/Themes/RealtimePlayWindow.xaml"/>
+        <ResourceDictionary Source="/SMS.Client.Business;component/RealtimeMonitor/Themes/RealtimeMonitorView.xaml"/>
+        <ResourceDictionary Source="/SMS.Client.Business;component/RealtimePlayWindow/Themes/RealtimePlayWindow.xaml"/>
 
-        <ResourceDictionary Source="/SMS.Client.Business;component/Themes/VideoReplayControlPanel.xaml"/>
-        <ResourceDictionary Source="/SMS.Client.Business;component/Themes/SceneBacktraceView.xaml"/>
+        <ResourceDictionary Source="/SMS.Client.Business;component/VideoReplayControlPanel/Themes/VideoReplayControlPanel.xaml"/>
+        <ResourceDictionary Source="/SMS.Client.Business;component/VideoSceneBacktrace/Themes/SceneBacktraceView.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

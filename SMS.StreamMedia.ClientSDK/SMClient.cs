@@ -104,7 +104,7 @@ namespace SMS.StreamMedia.ClientSDK
             if (loginId < 0)
             {
                 uint lastErr = CHCNetSDK.NET_DVR_GetLastError();
-                LogHelper.Debug(string.Format("设备{0}-{1}登陆失败，错误代码[{2}]", devIp, devPort, lastErr));
+                LogHelper.Default.Debug(string.Format("设备{0}-{1}登陆失败，错误代码[{2}]", devIp, devPort, lastErr));
                 return null;
             }
 
@@ -119,7 +119,7 @@ namespace SMS.StreamMedia.ClientSDK
             if (!CHCNetSDK.NET_DVR_SetDVRMessageCallBack_V31(_msgCallback_V31, ptr))
             {
                 uint lastErr = CHCNetSDK.NET_DVR_GetLastError();
-                LogHelper.Debug(string.Format("设备{0}-{1}设置报警回调失败，错误代码[{2}]", devIp, devPort, lastErr));
+                LogHelper.Default.Debug(string.Format("设备{0}-{1}设置报警回调失败，错误代码[{2}]", devIp, devPort, lastErr));
             }
 
             CHCNetSDK.NET_DVR_SETUPALARM_PARAM setAlarmParam = new CHCNetSDK.NET_DVR_SETUPALARM_PARAM();
@@ -178,7 +178,7 @@ namespace SMS.StreamMedia.ClientSDK
             {
                 uint iLastErr = CHCNetSDK.NET_DVR_GetLastError();
 
-                LogHelper.Debug(string.Format("设备{0}注销失败，错误代码[{1}]", userId, iLastErr));
+                LogHelper.Default.Debug(string.Format("设备{0}注销失败，错误代码[{1}]", userId, iLastErr));
                 return iLastErr;
             }
 
@@ -247,7 +247,7 @@ namespace SMS.StreamMedia.ClientSDK
             if (realPlayId < 0)
             {
                 uint lastErr = CHCNetSDK.NET_DVR_GetLastError();
-                LogHelper.Debug(string.Format("设备{0}-{1}-{2}实时预览失败，错误代码[{3}]", devIp, devPort, channel, lastErr));
+                LogHelper.Default.Debug(string.Format("设备{0}-{1}-{2}实时预览失败，错误代码[{3}]", devIp, devPort, channel, lastErr));
                 return Math.Abs((int)lastErr) * (-1);
             }
 
@@ -265,7 +265,7 @@ namespace SMS.StreamMedia.ClientSDK
             {
                 uint lastErr = CHCNetSDK.NET_DVR_GetLastError();
 
-                LogHelper.Debug(string.Format("设备{0}停止实时预览失败，错误代码[{1}]", playHandle, lastErr));
+                LogHelper.Default.Debug(string.Format("设备{0}停止实时预览失败，错误代码[{1}]", playHandle, lastErr));
                 return Math.Abs((int)lastErr) * (-1);
             }
 
@@ -284,7 +284,7 @@ namespace SMS.StreamMedia.ClientSDK
             if (!CHCNetSDK.NET_DVR_CapturePicture(playHandle, fileName))
             {
                 uint lastErr = CHCNetSDK.NET_DVR_GetLastError();
-                LogHelper.Debug(string.Format("设备{0}预览抓图失败，错误代码[{1}]", playHandle, lastErr));
+                LogHelper.Default.Debug(string.Format("设备{0}预览抓图失败，错误代码[{1}]", playHandle, lastErr));
                 return Math.Abs((int)lastErr) * (-1);
             }
 
@@ -323,7 +323,7 @@ namespace SMS.StreamMedia.ClientSDK
             if (!CHCNetSDK.NET_DVR_CaptureJPEGPicture(userId, channel, ref lpJpegPara, fileName))
             {
                 uint lastErr = CHCNetSDK.NET_DVR_GetLastError();
-                LogHelper.Debug(string.Format("设备{0}预览抓图失败，错误代码[{1}]", userId, lastErr));
+                LogHelper.Default.Debug(string.Format("设备{0}预览抓图失败，错误代码[{1}]", userId, lastErr));
                 return Math.Abs((int)lastErr) * (-1);
             }
 
@@ -360,7 +360,7 @@ namespace SMS.StreamMedia.ClientSDK
             if (!CHCNetSDK.NET_DVR_SaveRealData(playHandle, fileName))
             {
                 uint lastErr = CHCNetSDK.NET_DVR_GetLastError();
-                LogHelper.Debug(string.Format("设备{0}预览开始录像失败，错误代码[{1}]", playHandle, lastErr));
+                LogHelper.Default.Debug(string.Format("设备{0}预览开始录像失败，错误代码[{1}]", playHandle, lastErr));
                 return Math.Abs((int)lastErr) * (-1);
             }
 
@@ -377,7 +377,7 @@ namespace SMS.StreamMedia.ClientSDK
             if (!CHCNetSDK.NET_DVR_StopSaveRealData(playHandle))
             {
                 uint lastErr = CHCNetSDK.NET_DVR_GetLastError();
-                LogHelper.Debug(string.Format("设备{0}预览停止录像失败，错误代码[{1}]", playHandle, lastErr));
+                LogHelper.Default.Debug(string.Format("设备{0}预览停止录像失败，错误代码[{1}]", playHandle, lastErr));
                 return Math.Abs((int)lastErr) * (-1);
             }
 

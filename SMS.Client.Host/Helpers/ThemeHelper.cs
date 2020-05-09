@@ -1,4 +1,5 @@
-﻿using SMS.Client.Host.Models;
+﻿using SMS.Client.Common.Utilities;
+using SMS.Client.Host.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;

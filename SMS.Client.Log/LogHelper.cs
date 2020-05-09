@@ -6,56 +6,124 @@ namespace SMS.Client.Log
 {
     public class LogHelper
     {
-        public static void Debug(object message)
+        #region Fields
+
+        private ILog _log = null;
+
+        private static LogHelper _default = null;
+        private static object _lock = new object();
+
+        #endregion
+
+        #region Properties
+
+        public static LogHelper Default
         {
+            get
+            {
+                if (_default == null)
+                {
+                    lock (_lock)
+                    {
+                        if (_default == null)
+                        {
+                            _default = new LogHelper("loginfo");
+                        }
+                    }
+                }
+
+                return _default;
+            }
         }
 
-        public static void DebugFormatted(string format, params object[] args)
+        #endregion
+
+        #region Constructors
+
+        private LogHelper(string loggerName)
         {
+            _log = new Log4NetAdapter(loggerName);
         }
 
-        public static void Error(object message)
+        #endregion
+
+        #region Private Methods
+
+        #endregion
+
+        #region Public Methods
+
+        public static LogHelper GetInstance(string loggerName)
         {
+            return new LogHelper(loggerName);
         }
 
-        public static void Error(object message, Exception exception)
+        public void Debug(object message)
         {
+            _log.Debug(message);
         }
 
-        public static void ErrorFormatted(string format, params object[] args)
+        public void DebugFormatted(string format, params object[] args)
         {
+            _log.DebugFormatted(format, args);
         }
 
-        public static void Fatal(object message)
+        public void Error(object message)
         {
+            _log.Error(message);
         }
 
-        public static void Fatal(object message, Exception exception)
+        public void Error(object message, Exception exception)
         {
+            _log.Error(message, exception);
         }
 
-        public static void FatalFormatted(string format, params object[] args)
+        public void ErrorFormatted(string format, params object[] args)
         {
+            _log.ErrorFormatted(format, args);
         }
 
-        public static void Info(object message)
+        public void Fatal(object message)
         {
+            _log.Fatal(message);
         }
 
-        public static void InfoFormatted(string format, params object[] args)
+        public void Fatal(object message, Exception exception)
         {
+            _log.Fatal(message, exception);
         }
 
-        public static void Warn(object message)
+        public void FatalFormatted(string format, params object[] args)
         {
+            _log.FatalFormatted(format, args);
         }
 
-        public static void Warn(object message, Exception exception)
+        public void Info(object message)
         {
+            _log.Info(message);
         }
 
-        public static void WarnFormatted(string format, params object[] args)
+        public void InfoFormatted(string format, params object[] args)
         {
+            _log.InfoFormatted(format, args);
         }
+
+        public void Warn(object message)
+        {
+            _log.Warn(message);
+        }
+
+        public void Warn(object message, Exception exception)
+        {
+            _log.Warn(message, exception);
+        }
+
+        public void WarnFormatted(string format, params object[] args)
+        {
+            _log.WarnFormatted(format, args);
+        }
+
+        #endregion
+
     }
 }

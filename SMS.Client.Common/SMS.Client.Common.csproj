@@ -5,4 +5,10 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SMS.Client.Controls\SMS.Client.Controls.csproj" />
+    <ProjectReference Include="..\SMS.Client.MVVM\SMS.Client.MVVM.csproj" />
+    <ProjectReference Include="..\SMS.StreamMedia.ClientSDK\SMS.StreamMedia.ClientSDK.csproj" />
+  </ItemGroup>
+
 </Project>

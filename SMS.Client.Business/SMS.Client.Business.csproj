@@ -8,7 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SMS.Client.Common\SMS.Client.Common.csproj" />
     <ProjectReference Include="..\SMS.Client.Controls\SMS.Client.Controls.csproj" />
+    <ProjectReference Include="..\SMS.StreamMedia.ClientSDK\SMS.StreamMedia.ClientSDK.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="RealtimePlayWindow\ViewModels\" />
+    <Folder Include="VideoReplayControlPanel\ViewModels\" />
+    <Folder Include="VideoSceneBacktrace\ViewModels\" />
   </ItemGroup>
 
 </Project>

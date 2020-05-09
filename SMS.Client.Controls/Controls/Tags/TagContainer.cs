@@ -194,7 +194,7 @@ namespace SMS.Client.Controls
                 }
                 catch (Exception ex)
                 {
-                    LogHelper.DebugFormatted("标签刷新异常，异常信息：{0}", ex.Message);
+                    LogHelper.Default.DebugFormatted("标签刷新异常，异常信息：{0}", ex.Message);
                 }
                 finally
                 {

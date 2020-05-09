@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SMS.Client.UnitTest", "SMS.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SMS.StreamMedia.ClientSDK", "SMS.StreamMedia.ClientSDK\SMS.StreamMedia.ClientSDK.csproj", "{06559D78-9F65-4459-AF64-E12195E02655}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMS.Client.Common", "SMS.Client.Common\SMS.Client.Common.csproj", "{3DEEB5D5-729A-49F0-9E6E-C0A175D848DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SMS.Client.Common", "SMS.Client.Common\SMS.Client.Common.csproj", "{3DEEB5D5-729A-49F0-9E6E-C0A175D848DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMS.Client.MVVM", "SMS.Client.MVVM\SMS.Client.MVVM.csproj", "{44B5D242-298F-4565-BF9A-635E99F92CF0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{3DEEB5D5-729A-49F0-9E6E-C0A175D848DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3DEEB5D5-729A-49F0-9E6E-C0A175D848DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3DEEB5D5-729A-49F0-9E6E-C0A175D848DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44B5D242-298F-4565-BF9A-635E99F92CF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44B5D242-298F-4565-BF9A-635E99F92CF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44B5D242-298F-4565-BF9A-635E99F92CF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44B5D242-298F-4565-BF9A-635E99F92CF0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

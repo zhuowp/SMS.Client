@@ -1,8 +1,8 @@
 ﻿using SMS.Client.Business;
+using SMS.Client.Common.Models;
+using SMS.Client.Common.Utilities;
 using SMS.Client.Controls;
-using SMS.Client.Host.Helpers;
-using SMS.Client.Host.Models;
-using SMS.Client.Host.ViewModels;
+using SMS.Client.Log;
 using SMS.StreamMedia.ClientSDK;
 using System;
 using System.Collections.Generic;
@@ -30,9 +30,10 @@ namespace SMS.Client
         public MainWindow()
         {
             InitializeComponent();
-            realtimeMonitorView.DataContext = new RealtimeMonitorViewModel();
 
+            realtimeMonitorView.DataContext = new RealtimeMonitorViewModel();
             realtimeMonitorView.CloseWindow += RealtimeMonitorView_CloseWindow;
+
             Loaded += MainWindow_Loaded;
             Closed += MainWindow_Closed;
         }
@@ -50,81 +51,21 @@ namespace SMS.Client
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            if (realtimeMonitorView.TagContainer != null)
+            LogHelper.Default.Info("-------------");
+            LogHelper.GetInstance("logerror").Error("xxxxxxxxxxxxxxxxxxxxx");
+            VideoPlayModel playModel = new VideoPlayModel
             {
-                realtimeMonitorView.TagContainer.TagPreviewMouseRightButtonUp += TagContainer_TagPreviewMouseRightButtonUp;
-                realtimeMonitorView.TagContainer.TagPreviewMouseLeftButtonDown += TagContainer_TagPreviewMouseLeftButtonDown;
-                realtimeMonitorView.TagContainer.TagPreviewMouseLeftButtonUp += TagContainer_TagPreviewMouseLeftButtonUp;
-                realtimeMonitorView.TagContainer.TagPreviewMouseMove += TagContainer_TagPreviewMouseMove;
-                realtimeMonitorView.TagContainer.TagClick += TagContainer_TagClick;
-                realtimeMonitorView.TagContainer.TagLocationChanged += TagContainer_TagLocationChanged;
-            }
-
-            SMClient.Instance.OnGisInfoChanged += Instance_OnGisInfoChanged;
-            VideoPlayModel playModel = new VideoPlayModel();
-
-            playModel.Ip = "192.168.28.136";
-            playModel.Port = 8000;
-            playModel.Channel = 1;
-            playModel.UserName = "admin";
-            playModel.Password = "admin12345";
-            playModel.StreamType = 0;
+                Ip = "192.168.28.136",
+                Port = 8000,
+                Channel = 1,
+                UserName = "admin",
+                Password = "admin12345",
+                StreamType = 0
+            };
 
             realtimeMonitorView.Player.PlayHelper = new VideoPlayHelper();
             realtimeMonitorView.Player?.StartPlay(playModel);
         }
 
-        private void Instance_OnGisInfoChanged(CHCNetSDK.NET_DVR_GIS_UPLOADINFO arg)
-        {
-        }
-
-        private void TagContainer_TagLocationChanged(TagBase arg1, ITagModel arg2)
-        {
-        }
-
-        private void TagContainer_TagClick(TagBase arg1, RoutedEventArgs arg2)
-        {
-            RealtimePlayWindow realPlayWindow = new RealtimePlayWindow(400, 300);
-
-            realPlayWindow.Loaded += (s, e) =>
-            {
-                VideoPlayModel playModel = new VideoPlayModel();
-
-                playModel.Ip = "192.168.28.136";
-                playModel.Port = 8000;
-                playModel.Channel = 1;
-                playModel.UserName = "admin";
-                playModel.Password = "admin12345";
-                playModel.StreamType = 0;
-
-                realPlayWindow.RealPlayer.PlayHelper = new VideoPlayHelper();
-                Task.Factory.StartNew(() =>
-                {
-                    Thread.Sleep(1000);
-                    Dispatcher.Invoke(() =>
-                    {
-                        realPlayWindow.RealPlayer.StartPlay(playModel);
-                    });
-                });
-            };
-
-            realPlayWindow.Show();
-        }
-
-        private void TagContainer_TagPreviewMouseMove(TagBase arg1, MouseEventArgs arg2)
-        {
-        }
-
-        private void TagContainer_TagPreviewMouseLeftButtonUp(TagBase arg1, MouseButtonEventArgs arg2)
-        {
-        }
-
-        private void TagContainer_TagPreviewMouseLeftButtonDown(TagBase arg1, MouseButtonEventArgs arg2)
-        {
-        }
-
-        private void TagContainer_TagPreviewMouseRightButtonUp(TagBase arg1, MouseButtonEventArgs arg2)
-        {
-        }
     }
 }

@@ -66,28 +66,12 @@ namespace SMS.Client.Common.Utilities
             return (absoluteAngle - cameraRotateAngle + DOUBLE_PI) % DOUBLE_PI;
         }
 
-        private double CameraAngleToAbsoluteAngle(double cameraAngle, double cameraRotateAngle)
+        private double CameraAngleToAbsoluteAngle(double angleToCamera, double cameraRotateAngle)
         {
-            return (cameraRotateAngle + cameraAngle + DOUBLE_PI) % DOUBLE_PI;
+            return (cameraRotateAngle + angleToCamera + DOUBLE_PI) % DOUBLE_PI;
         }
 
-        #endregion
-
-        #region Protected Methods
-
-        #endregion
-
-        #region Public Methods
-
-        /// <summary>
-        /// 传入的角均为角度制
-        /// </summary>
-        /// <param name="panAngle"></param>
-        /// <param name="tiltAngle"></param>
-        /// <param name="horizontalFieldOfView"></param>
-        /// <param name="verticalFieldOfView"></param>
-        /// <returns></returns>
-        public Point AngleLocationToScreenLocation(double panAngle, double tiltAngle, double cameraPan, double cameraTilt, double horizontalFieldOfView, double verticalFieldOfView)
+        private Point AngleLocationToScreenLocation(double panAngle, double tiltAngle, double cameraPan, double cameraTilt, double horizontalFieldOfView, double verticalFieldOfView)
         {
             double radianPanAngle = panAngle.ToRadian();
             double radianTiltAngle = tiltAngle.ToRadian();
@@ -107,19 +91,72 @@ namespace SMS.Client.Common.Utilities
             return new Point(normalizedWidth * _width, normalizedHeight * _height);
         }
 
-        public Point AngleLocationToScreenLocation(PTZ ptz, PTZ cameraPtz, double horizontalFieldOfView, double verticalFieldOfView)
+        #endregion
+
+        #region Protected Methods
+
+        #endregion
+
+        #region Public Methods
+
+        public Point AngleLocationToScreenLocation(double panAngle, double tiltAngle, CameraParam cameraParam)
         {
-            return AngleLocationToScreenLocation(ptz.Pan, ptz.Tilt, cameraPtz.Pan, cameraPtz.Tilt, horizontalFieldOfView, verticalFieldOfView);
+            return AngleLocationToScreenLocation(panAngle, tiltAngle, cameraParam.Pan, cameraParam.Tilt, cameraParam.HorizontalFieldOfView, cameraParam.VerticalFieldOfView);
         }
 
-        public PTZ ScreenLocationToAngleLocation(Point location, double horizontalFieldOfView, double verticalFieldOfView)
+        public PTZ ScreenLocationToAngleLocation(Point location, CameraParam cameraParam)
         {
-            double panAngle = NormalizedDisplacementToAngle(horizontalFieldOfView, location.X);
-            double tiltAngle = NormalizedDisplacementToAngle(verticalFieldOfView, location.Y);
+            double panAngleToCamera = NormalizedDisplacementToAngle(cameraParam.HorizontalFieldOfView, location.X);
+            double tiltAngleToCamera = NormalizedDisplacementToAngle(cameraParam.VerticalFieldOfView, location.Y);
 
-            return new PTZ(panAngle, tiltAngle, 1);
+            double absolutePanAngle = CameraAngleToAbsoluteAngle(panAngleToCamera, cameraParam.Pan);
+            double absoluteTiltAngle = CameraAngleToAbsoluteAngle(tiltAngleToCamera, cameraParam.Tilt);
+
+            return new PTZ(absolutePanAngle, absoluteTiltAngle, 1);
         }
 
         #endregion
+
+
+        public void Pt2Xy(double hfov, double vfov, double cp, double ct, double tp, double tt, out double x, out double y)
+        {
+            x = 0.0;
+            y = 0.0;
+
+            double num = 0.0;
+            int num2 = 1;
+            int num3 = 1;
+            if (cp >= tp)
+            {
+                num = cp - tp;
+                num2 = -1;
+            }
+            else if (tp - cp > hfov)
+            {
+                num = 360.0 - tp + cp;
+                num2 = -1;
+            }
+            else
+            {
+                num = tp - cp;
+            }
+            double num4 = Math.Cos((hfov / 2.0).ToRadian());
+            double cor = Math.Acos(Math.Cos(ct.ToRadian()) * Math.Cos(tt.ToRadian()) * Math.Cos(num.ToRadian()) + Math.Sin(ct.ToRadian()) * Math.Sin(tt.ToRadian())).ToDegree();
+            double num5 = num4 / Math.Cos(cor.ToRadian());
+            double num6 = num5 * Math.Cos(tt.ToRadian());
+            double num7 = num6 * Math.Sin(num.ToRadian());
+            double num8 = num6 * Math.Cos(num.ToRadian());
+            double num9 = Math.Atan(num5 * Math.Sin(tt.ToRadian()) / num8).ToDegree();
+
+            if (num9 < ct)
+            {
+                num3 = -1;
+            }
+            double cor2 = Math.Abs(ct - num9);
+            y = _height / 2.0 * Math.Tan(cor2.ToRadian()) / Math.Tan((vfov / 2.0).ToRadian());
+            x = num7 * _width / 2.0 / Math.Sin((hfov / 2.0).ToRadian());
+            y = _height / 2.0 + y * num3;
+            x = _width / 2.0 + x * num2;
+        }
     }
 }
