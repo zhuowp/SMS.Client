@@ -1,6 +1,8 @@
-﻿using SMS.Client.Common.Models;
+﻿using SMS.Client.Common.Caches;
+using SMS.Client.Common.Models;
 using SMS.Client.Common.Utilities;
 using SMS.Client.Controls;
+using SMS.Client.Log;
 using SMS.StreamMedia.ClientSDK;
 using System;
 using System.Collections.Generic;
@@ -64,7 +66,6 @@ namespace SMS.Client.Business
         #region Events
 
         public event Action CloseWindow;
-        public event Action<object, Point> OnShowAddTagWindow;
 
         #endregion
 
@@ -141,6 +142,16 @@ namespace SMS.Client.Business
         {
             TagContainer tagContainer = sender as TagContainer;
             Point mouseClickPosition = Mouse.GetPosition(tagContainer);
+
+            string devId = "test";
+            HolographicInfo holographicInfo = HolographicInfoCache.Instance.GetHolographicInfoByDeviceId(devId);
+            if (string.IsNullOrEmpty(holographicInfo.Id))
+            {
+                LogHelper.Default.DebugFormatted("获取设备id：{0} 的全息信息失败，无法计算标签位置", devId);
+                return;
+            }
+
+            PTZ ptz = _spaceTransformer.ScreenLocationToAngleLocation(mouseClickPosition, holographicInfo.CameraParameter);
         }
 
         private void TagContainer_TagLocationChanged(TagBase arg1, ITagModel arg2)

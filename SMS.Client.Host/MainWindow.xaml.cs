@@ -51,16 +51,6 @@ namespace SMS.Client
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            LogHelper.Default.Info("Default Info");
-            LogHelper.Default.InfoFormatted("Default Info Format -- {0} -- {1}", "arg0", "arg1");
-            LogHelper.Default.Debug("Default Debug");
-            LogHelper.Default.Error("Default Error");
-            LogHelper.Default.Error("Default Error With Exception:", new Exception("Test Exception"));
-            LogHelper.Default.Fatal("Default Fatal");
-            LogHelper.GetInstance("logerror").Error("xxxxxxxxxxxxxxxxxxxxx");
-            LogHelper.GetInstance("logerror").Error("-=-=-=-=-=-=-=-=-=-");
-            LogHelper.GetInstance("UnhandledException").Error("Test Unhandled Exception.");
-
             VideoPlayModel playModel = new VideoPlayModel
             {
                 Ip = "192.168.28.136",

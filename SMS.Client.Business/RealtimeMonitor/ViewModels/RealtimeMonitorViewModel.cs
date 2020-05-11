@@ -1,4 +1,5 @@
-﻿using SMS.Client.Common.Models;
+﻿using SMS.Client.Common.Caches;
+using SMS.Client.Common.Models;
 using SMS.Client.Common.Models.Tags;
 using SMS.Client.Common.Utilities;
 using SMS.Client.Controls;
@@ -118,7 +119,7 @@ namespace SMS.Client.Business
             //};
             //TagCollection.Add(tagModel4);
 
-            SMClient.Instance.OnGisInfoChanged += Instance_OnGisInfoChanged;
+            HolographicInfoCache.Instance.OnHolographicInfoChanged += Instance_OnHolographicInfoChanged;
             InitCommands();
         }
 
@@ -131,33 +132,28 @@ namespace SMS.Client.Business
             AddTagCommand = new RelayCommand<object>(ShowAddTagWindow);
         }
 
-        private void ShowAddTagWindow(object obj)
+        private void Instance_OnHolographicInfoChanged(HolographicInfo obj)
         {
-        }
-
-        private void Instance_OnGisInfoChanged(CHCNetSDK.NET_DVR_GIS_UPLOADINFO obj)
-        {
-            if (obj.fHorizontalValue == 0 || obj.fVerticalValue == 0)
-            {
-                return;
-            }
-
             for (int i = 0; i < points.Count; i++)
             {
                 Point point = points[i];
-                _spaceTransformer.Pt2Xy(obj.fHorizontalValue, obj.fVerticalValue, obj.struPtzPos.fPanPos, obj.struPtzPos.fTiltPos, point.X, point.Y, out double x, out double y);
-                CameraParam cameraParam = new CameraParam()
-                {
-                    HorizontalFieldOfView = obj.fHorizontalValue,
-                    VerticalFieldOfView = obj.fVerticalValue,
-                    Pan = obj.struPtzPos.fPanPos,
-                    Tilt = obj.struPtzPos.fTiltPos,
-                    Zoom = obj.struPtzPos.fZoomPos,
-                };
+                //_spaceTransformer.Pt2Xy(obj.fHorizontalValue, obj.fVerticalValue, obj.struPtzPos.fPanPos, obj.struPtzPos.fTiltPos, point.X, point.Y, out double x, out double y);
+                //CameraParam cameraParam = new CameraParam()
+                //{
+                //    HorizontalFieldOfView = obj.fHorizontalValue,
+                //    VerticalFieldOfView = obj.fVerticalValue,
+                //    Pan = obj.struPtzPos.fPanPos,
+                //    Tilt = obj.struPtzPos.fTiltPos,
+                //    Zoom = obj.struPtzPos.fZoomPos,
+                //};
 
-                Point tagPoint = _spaceTransformer.AngleLocationToScreenLocation(point.X, point.Y, cameraParam);
+                Point tagPoint = _spaceTransformer.AngleLocationToScreenLocation(point.X, point.Y, obj.CameraParameter);
                 TagCollection[i].Location = tagPoint;
             }
+        }
+
+        private void ShowAddTagWindow(object obj)
+        {
         }
 
         #endregion
