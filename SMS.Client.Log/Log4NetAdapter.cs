@@ -9,15 +9,32 @@ namespace SMS.Client.Log
 {
     public class Log4NetAdapter : ILog
     {
+        #region Fields
+
         private log4net.ILog _logger = null;
+        private static log4net.Repository.ILoggerRepository _repository = null;
+
+        #endregion
+
+        #region Constructors
+
+        static Log4NetAdapter()
+        {
+            _repository = LogManager.CreateRepository("root");
+        }
 
         public Log4NetAdapter(string loggerName)
         {
-            var repository = LogManager.CreateRepository(loggerName);
+            string configPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Configs/log4net.config");
+            FileInfo configFileInfo = new FileInfo(configPath);
+            XmlConfigurator.ConfigureAndWatch(_repository, configFileInfo);
 
-            XmlConfigurator.Configure(repository, new FileInfo("log4net.config"));
-            _logger = LogManager.GetLogger(repository.Name, loggerName);
+            _logger = LogManager.GetLogger(_repository.Name, loggerName);
         }
+
+        #endregion
+
+        #region Public Methods
 
         public void Debug(object message)
         {
@@ -83,5 +100,7 @@ namespace SMS.Client.Log
         {
             _logger.WarnFormat(format, args);
         }
+
+        #endregion
     }
 }
