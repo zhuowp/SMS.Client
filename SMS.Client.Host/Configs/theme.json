@@ -1,4 +1,5 @@
 {
+  "Id": "536db577-f136-4c67-ac71-0105f212f02a",
   "ThemeName": "默认主题",
   "AssemblyName": "SMS.Client.Theme",
   "EntrancePath": "Themes/Generic.xaml",

@@ -6,6 +6,7 @@ namespace SMS.Client.Host.Models
 {
     public class ThemeModel
     {
+        public string Id { get; set; }
         public string ThemeName { get; set; }
         public string AssemblyName { get; set; }
         public string EntrancePath { get; set; }
