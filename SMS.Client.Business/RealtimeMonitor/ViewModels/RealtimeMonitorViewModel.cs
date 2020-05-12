@@ -138,14 +138,6 @@ namespace SMS.Client.Business
             {
                 Point point = points[i];
                 //_spaceTransformer.Pt2Xy(obj.fHorizontalValue, obj.fVerticalValue, obj.struPtzPos.fPanPos, obj.struPtzPos.fTiltPos, point.X, point.Y, out double x, out double y);
-                //CameraParam cameraParam = new CameraParam()
-                //{
-                //    HorizontalFieldOfView = obj.fHorizontalValue,
-                //    VerticalFieldOfView = obj.fVerticalValue,
-                //    Pan = obj.struPtzPos.fPanPos,
-                //    Tilt = obj.struPtzPos.fTiltPos,
-                //    Zoom = obj.struPtzPos.fZoomPos,
-                //};
 
                 Point tagPoint = _spaceTransformer.AngleLocationToScreenLocation(point.X, point.Y, obj.CameraParameter);
                 TagCollection[i].Location = tagPoint;

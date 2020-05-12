@@ -60,6 +60,7 @@ namespace SMS.Client.Business
         private Button _btnClose = null;
 
         private SpaceTransformer _spaceTransformer = null;
+        private Point _mouseRightClickPosition = default;
 
         #endregion
 
@@ -141,8 +142,21 @@ namespace SMS.Client.Business
         private void TagContainer_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
             TagContainer tagContainer = sender as TagContainer;
-            Point mouseClickPosition = Mouse.GetPosition(tagContainer);
+            _mouseRightClickPosition = Mouse.GetPosition(tagContainer);
 
+            ContextMenu cm = new ContextMenu();
+            MenuItem miAddTag = new MenuItem()
+            {
+                Header = "新增标签",
+            };
+            miAddTag.Click += MiAddTag_Click;
+            cm.Items.Add(miAddTag);
+
+            cm.IsOpen = true;
+        }
+
+        private void MiAddTag_Click(object sender, RoutedEventArgs e)
+        {
             string devId = "test";
             HolographicInfo holographicInfo = HolographicInfoCache.Instance.GetHolographicInfoByDeviceId(devId);
             if (string.IsNullOrEmpty(holographicInfo.Id))
@@ -151,7 +165,11 @@ namespace SMS.Client.Business
                 return;
             }
 
-            PTZ ptz = _spaceTransformer.ScreenLocationToAngleLocation(mouseClickPosition, holographicInfo.CameraParameter);
+            PTZ ptz = _spaceTransformer.ScreenLocationToAngleLocation(_mouseRightClickPosition, holographicInfo.CameraParameter);
+
+            TagConfigWindow tagConfigWindow = new TagConfigWindow();
+            tagConfigWindow.Owner = Window.GetWindow(this);
+            tagConfigWindow.Show();
         }
 
         private void TagContainer_TagLocationChanged(TagBase arg1, ITagModel arg2)
@@ -212,6 +230,10 @@ namespace SMS.Client.Business
         {
             base.OnApplyTemplate();
             Player = GetTemplateChild("PART_Player") as RealtimePlayer;
+            if (Player != null)
+            {
+                Player.PlayHelper = new VideoPlayHelper();
+            }
 
             _ptzController = GetTemplateChild("PART_PtzController") as PtzController;
             if (_ptzController != null)

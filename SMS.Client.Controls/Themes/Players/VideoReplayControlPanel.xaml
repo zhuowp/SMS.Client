@@ -1,7 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:SMS.Client.Business"
-                    xmlns:ctrl="clr-namespace:SMS.Client.Controls;assembly=SMS.Client.Controls">
+                    xmlns:local="clr-namespace:SMS.Client.Controls">
     <Style TargetType="{x:Type local:VideoReplayControlPanel}">
         <Setter Property="Background" Value="#99999999"/>
         <Setter Property="Template">
@@ -16,14 +15,14 @@
                                 <RowDefinition Height="30"/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <ctrl:Timeline x:Name="PART_Timeline" Grid.Row="0" HorizontalAlignment="Stretch" >
+                            <local:Timeline x:Name="PART_Timeline" Grid.Row="0" HorizontalAlignment="Stretch" >
                                 <Grid>
-                                    <ctrl:TimelineBand x:Name="PART_MainTimelineBand"
+                                    <local:TimelineBand x:Name="PART_MainTimelineBand"
                                                        ScrollViewer.VerticalScrollBarVisibility="Auto" 
                                                        TimeFrameCollection="{Binding MainTimelineBand.TimeFrameCollection}"
                                                        CurrentDateTime="{Binding ReplayDateTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                 </Grid>
-                            </ctrl:Timeline>
+                            </local:Timeline>
 
                             <TextBlock Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="White"
                                        Text="{Binding ReplayDateTime, StringFormat={}{0:yyyy-MM-dd HH:mm:ss}}"/>
@@ -31,27 +30,27 @@
                             <Grid Grid.Row="2" VerticalAlignment="Top">
                                 <!--播放控制按钮-->
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
-                                    <ctrl:ImageButton x:Name="PART_SlowForwardButton" ToolTip="慢放" 
+                                    <local:ImageButton x:Name="PART_SlowForwardButton" ToolTip="慢放" 
                                                       HorizontalAlignment="Left" Width="24" Height="24" IconWidth="24" IconHeight="24"
                                                       Icon="{DynamicResource SlowForward1}"
                                                       IconPress="{DynamicResource SlowForward2}" 
                                                       IconMouseOver="{DynamicResource SlowForward2}"/>
-                                    <ctrl:ImageButton x:Name="PART_StopButton" ToolTip="停止"
+                                    <local:ImageButton x:Name="PART_StopButton" ToolTip="停止"
                                                       HorizontalAlignment="Left"
                                                       Icon="{DynamicResource Stop1}"
                                                       IconPress="{DynamicResource Stop2}" 
                                                       IconMouseOver="{DynamicResource Stop2}"/>
-                                    <ctrl:ImageButton x:Name="PART_PauseButton" Visibility="Collapsed" ToolTip="暂停"
+                                    <local:ImageButton x:Name="PART_PauseButton" Visibility="Collapsed" ToolTip="暂停"
                                                       HorizontalAlignment="Left" 
                                                       Icon="{DynamicResource Pause1}"
                                                       IconPress="{DynamicResource Pause2}" 
                                                       IconMouseOver="{DynamicResource Pause2}"/>
-                                    <ctrl:ImageButton x:Name="PART_PlayButton" ToolTip="播放" 
+                                    <local:ImageButton x:Name="PART_PlayButton" ToolTip="播放" 
                                                       HorizontalAlignment="Left"
                                                       Icon="{DynamicResource Play1}"
                                                       IconPress="{DynamicResource Play2}" 
                                                       IconMouseOver="{DynamicResource Play2}"/>
-                                    <ctrl:ImageButton x:Name="PART_FastForwardButton"  ToolTip="快进"
+                                    <local:ImageButton x:Name="PART_FastForwardButton"  ToolTip="快进"
                                                       HorizontalAlignment="Left" 
                                                       Icon="{DynamicResource FastForward1}"
                                                       IconPress="{DynamicResource FastForward2}" 

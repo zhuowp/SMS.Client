@@ -6,7 +6,10 @@
         <ResourceDictionary Source="/SMS.Client.Business;component/RealtimeMonitor/Themes/RealtimeMonitorView.xaml"/>
         <ResourceDictionary Source="/SMS.Client.Business;component/RealtimePlayWindow/Themes/RealtimePlayWindow.xaml"/>
 
-        <ResourceDictionary Source="/SMS.Client.Business;component/VideoReplayControlPanel/Themes/VideoReplayControlPanel.xaml"/>
         <ResourceDictionary Source="/SMS.Client.Business;component/VideoSceneBacktrace/Themes/SceneBacktraceView.xaml"/>
+
+        <ResourceDictionary Source="/SMS.Client.Business;component/TagConfig/Themes/TagConfigWindow.xaml"/>
+        <ResourceDictionary Source="/SMS.Client.Business;component/TagConfig/Themes/TagBaseInfoConfigView.xaml"/>
     </ResourceDictionary.MergedDictionaries>
+
 </ResourceDictionary>

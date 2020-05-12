@@ -61,7 +61,6 @@ namespace SMS.Client
                 StreamType = 0
             };
 
-            realtimeMonitorView.Player.PlayHelper = new VideoPlayHelper();
             realtimeMonitorView.Player?.StartPlay(playModel);
         }
 

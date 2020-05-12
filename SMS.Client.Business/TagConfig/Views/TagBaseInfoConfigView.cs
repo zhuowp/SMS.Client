@@ -1,4 +1,4 @@
-﻿using SMS.Client.Controls;
+﻿using SMS.Client.Business.TagConfig.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -21,14 +21,14 @@ namespace SMS.Client.Business
     /// 将此 XmlNamespace 特性添加到要使用该特性的标记文件的根
     /// 元素中:
     ///
-    ///     xmlns:MyNamespace="clr-namespace:SMS.Client.Business.RealtimeMonitor"
+    ///     xmlns:MyNamespace="clr-namespace:SMS.Client.Business.TagConfig.Views"
     ///
     ///
     /// 步骤 1b) 在其他项目中存在的 XAML 文件中使用该自定义控件。
     /// 将此 XmlNamespace 特性添加到要使用该特性的标记文件的根
     /// 元素中:
     ///
-    ///     xmlns:MyNamespace="clr-namespace:SMS.Client.Business.RealtimeMonitor;assembly=SMS.Client.Business.RealtimeMonitor"
+    ///     xmlns:MyNamespace="clr-namespace:SMS.Client.Business.TagConfig.Views;assembly=SMS.Client.Business.TagConfig.Views"
     ///
     /// 您还需要添加一个从 XAML 文件所在的项目到此项目的项目引用，
     /// 并重新生成以避免编译错误:
@@ -40,48 +40,37 @@ namespace SMS.Client.Business
     /// 步骤 2)
     /// 继续操作并在 XAML 文件中使用控件。
     ///
-    ///     <MyNamespace:RealtimePlayWindow/>
+    ///     <MyNamespace:TagBaseInfoConfigView/>
     ///
     /// </summary>
-    public class RealtimePlayWindow : Window
+    public class TagBaseInfoConfigView : Control
     {
         #region Fields
 
-        private Grid _header = null;
+        private ITagBaseInfoConfigViewModel _viewModel = null;
 
         #endregion
 
         #region Properties
 
-        public RealtimePlayer RealPlayer { get; private set; }
-
         #endregion
 
         #region Constructors
 
-        static RealtimePlayWindow()
+        static TagBaseInfoConfigView()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(RealtimePlayWindow), new FrameworkPropertyMetadata(typeof(RealtimePlayWindow)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(TagBaseInfoConfigView), new FrameworkPropertyMetadata(typeof(TagBaseInfoConfigView)));
         }
 
-        public RealtimePlayWindow()
+        public TagBaseInfoConfigView()
         {
-        }
-
-        public RealtimePlayWindow(double width, double height) 
-        {
-            Width = width;
-            Height = height;
+            _viewModel = new TagBaseInfoConfigViewModel();
+            DataContext = _viewModel;
         }
 
         #endregion
 
         #region Private Methods
-
-        private void Header_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            DragMove();
-        }
 
         #endregion
 
@@ -94,13 +83,6 @@ namespace SMS.Client.Business
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-
-            RealPlayer = GetTemplateChild("PART_Player") as RealtimePlayer;
-            _header = GetTemplateChild("PART_Header") as Grid;
-            if (_header != null)
-            {
-                _header.MouseDown += Header_MouseDown;
-            }
         }
 
         #endregion

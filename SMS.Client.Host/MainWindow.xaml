@@ -8,7 +8,7 @@
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize"
         Title="MainWindow" Height="600" Width="800">
     <Grid>
-        <bn:RealtimeMonitorView x:Name="realtimeMonitorView" />
+        <bn:RealtimeMonitorView x:Name="realtimeMonitorView" Visibility="Visible"/>
         <bn:SceneBacktraceView x:Name="sceneBacktraceView" Visibility="Collapsed"/>
     </Grid>
 </Window>

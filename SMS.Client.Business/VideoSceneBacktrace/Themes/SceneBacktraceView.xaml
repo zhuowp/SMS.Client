@@ -15,7 +15,7 @@
                                 <RowDefinition Height="120"/>
                             </Grid.RowDefinitions>
                             <ctrl:Replayer x:Name="PART_Replayer" Grid.Row="0" Background="Black"/>
-                            <local:VideoReplayControlPanel x:Name="PART_VideoReplayControlPanel" Grid.Row="1"/>
+                            <ctrl:VideoReplayControlPanel x:Name="PART_VideoReplayControlPanel" Grid.Row="1"/>
                         </Grid>
                     </Border>
                 </ControlTemplate>

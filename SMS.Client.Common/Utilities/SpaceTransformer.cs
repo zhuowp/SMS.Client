@@ -106,13 +106,22 @@ namespace SMS.Client.Common.Utilities
 
         public PTZ ScreenLocationToAngleLocation(Point location, CameraParam cameraParam)
         {
-            double panAngleToCamera = NormalizedDisplacementToAngle(cameraParam.HorizontalFieldOfView, location.X);
-            double tiltAngleToCamera = NormalizedDisplacementToAngle(cameraParam.VerticalFieldOfView, location.Y);
+            double radianCameraPan = cameraParam.Pan.ToRadian();
+            double radianCameraTilt = cameraParam.Tilt.ToRadian();
 
-            double absolutePanAngle = CameraAngleToAbsoluteAngle(panAngleToCamera, cameraParam.Pan);
-            double absoluteTiltAngle = CameraAngleToAbsoluteAngle(tiltAngleToCamera, cameraParam.Tilt);
+            double radianHorizontalFieldOfView = cameraParam.HorizontalFieldOfView.ToRadian();
+            double radianVerticalFieldOfView = cameraParam.VerticalFieldOfView.ToRadian();
 
-            return new PTZ(absolutePanAngle, absoluteTiltAngle, 1);
+            double horizontalNormalizedDisplacement = location.X / _width;
+            double verticalNormalizedDisplacement = location.Y / _height;
+
+            double panAngleToCamera = NormalizedDisplacementToAngle(radianHorizontalFieldOfView, horizontalNormalizedDisplacement);
+            double tiltAngleToCamera = NormalizedDisplacementToAngle(radianVerticalFieldOfView, verticalNormalizedDisplacement);
+
+            double absolutePanAngle = CameraAngleToAbsoluteAngle(panAngleToCamera, radianCameraPan);
+            double absoluteTiltAngle = CameraAngleToAbsoluteAngle(tiltAngleToCamera, radianCameraTilt);
+
+            return new PTZ(absolutePanAngle.ToDegree(), absoluteTiltAngle.ToDegree(), 1);
         }
 
         #endregion

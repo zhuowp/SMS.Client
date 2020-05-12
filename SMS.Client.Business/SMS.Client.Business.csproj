@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <Folder Include="RealtimePlayWindow\ViewModels\" />
-    <Folder Include="VideoReplayControlPanel\ViewModels\" />
     <Folder Include="VideoSceneBacktrace\ViewModels\" />
   </ItemGroup>
 

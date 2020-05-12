@@ -9,6 +9,7 @@
         <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/Players/PtzController.xaml"/>
         <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/Players/RealtimePlayer.xaml"/>
         <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/Players/Replayer.xaml"/>
+        <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/Players/VideoReplayControlPanel.xaml"/>
 
         <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/Timelines/Timeline.xaml"/>
         <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/Timelines/TimelineBand.xaml"/>
@@ -32,4 +33,17 @@
         <ResourceDictionary Source="/SMS.Client.Controls;component/Themes/HeatMaps/HeatMapLegend.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
+
+    <Style TargetType="{x:Type local:TWindow}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:TWindow}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>
